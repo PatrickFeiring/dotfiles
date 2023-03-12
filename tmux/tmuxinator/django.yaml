@@ -1,0 +1,9 @@
+name: django
+root: .
+windows:
+  - all:
+      layout: main-vertical
+      panes:
+        - <%= ENV["EDITOR"] %>
+        - source env/bin/activate && ./manage.py runserver
+        - git status

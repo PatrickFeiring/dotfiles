@@ -1,0 +1,9 @@
+name: flask
+root: .
+windows:
+  - all:
+      layout: main-vertical
+      panes:
+        - <%= ENV["EDITOR"] %>
+        - source env/bin/activate && flask --debug --app=app.py run
+        - git status

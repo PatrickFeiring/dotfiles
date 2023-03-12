@@ -1,0 +1,72 @@
+alias g=git
+alias gr='cd $(git rev-parse --show-toplevel)'
+alias ll='ls -FGlAhp'
+alias k='kubectl'
+alias t=tmux
+alias tx=tmuxinator
+
+alias ungron='gron --ungron'
+
+shopt -s autocd
+shopt -s cdspell
+shopt -s checkjobs
+
+set -o vi
+
+[ -f ~/.git-completion.sh ] && source ~/.git-completion.sh
+
+if [[ -f ~/.git-prompt.sh ]]; then
+    source ~/.git-prompt.sh
+    PS1='\u: \w$(__git_ps1 " (%s)")\$ '
+fi
+
+# History settings
+HISTSIZE=10000
+HISTFILESIZE=10000
+shopt -s histappend
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+function append-help() {
+  READLINE_LINE="$READLINE_LINE --help"
+  READLINE_POINT=${#READLINE_LINE}
+}
+bind -x '"\C-h": append-help'
+
+function pet-select() {
+  BUFFER=$(pet search --query "$READLINE_LINE")
+  READLINE_LINE=$BUFFER
+  READLINE_POINT=${#BUFFER}
+}
+bind -x '"\C-x\C-r": pet-select'
+
+_complete_ssh_hosts ()
+{
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
+                    cut -f 1 -d ' ' | \
+                    sed -e s/,.*//g | \
+                    grep -v ^# | \
+                    uniq | \
+                    grep -v "\[" ;
+            cat ~/.ssh/config | \
+                    grep "^Host " | \
+                    awk '{print $2}'
+            `
+    COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+    return 0
+}
+complete -F _complete_ssh_hosts ssh
+
+if command -v fzf-share >/dev/null; then
+  source "$(fzf-share)/key-bindings.bash"
+  source "$(fzf-share)/completion.bash"
+fi
+
+if command -v direnv >/dev/null; then
+  eval "$(direnv hook bash)"
+fi
+
+[ -f ~/.ghcup/env ] && source ~/.ghcup/env
+[ -f ~/.utils.sh ] && source ~/.utils.sh
+[ -f ~/.bashenv ] && source ~/.bashenv

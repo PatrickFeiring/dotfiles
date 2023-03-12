@@ -1,0 +1,9 @@
+name: vite
+root: .
+windows:
+  - all:
+      layout: main-vertical
+      panes:
+        - <%= ENV["EDITOR"] %>
+        - npm run dev
+        - git status

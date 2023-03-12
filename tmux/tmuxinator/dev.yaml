@@ -1,0 +1,8 @@
+name: dev
+root: .
+windows:
+  - all:
+      layout: main-vertical
+      panes:
+        - <%= ENV["EDITOR"] %>
+        - "git status"

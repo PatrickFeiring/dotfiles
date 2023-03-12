@@ -1,0 +1,19 @@
+export EDITOR=nvim
+export GIT_EDITOR=nvim
+
+export BAT_THEME="Nord"
+
+export TMUXINATOR_CONFIG=~/.tmuxinator
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden'
+export FZF_DEFAULT_OPTS='--height 50% --reverse --multi'
+export FZF_CTRL_T_COMMAND='fd --type f --hidden'
+
+export DOCKER_BUILDKIT=1
+
+export PATH="$PATH:./ghcup/.bin"
+export PATH="$PATH:./node_modules/.bin"
+export PATH="$PATH:$HOME/.cabal/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.npm-global/bin"

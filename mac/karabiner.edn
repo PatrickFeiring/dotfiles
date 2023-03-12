@@ -1,0 +1,7 @@
+{:main [
+    {:des "make caps lock hyper key"
+        :rules [
+            [:##caps_lock :left_control nil {:alone :escape}]
+        ]
+    }
+]}

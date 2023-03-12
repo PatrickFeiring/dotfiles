@@ -1,0 +1,58 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: 
+  - '~'
+  - '~/.config'
+
+- create:
+  - ~/.config
+  - ~/.config/alacritty
+  - ~/.config/fd
+  - ~/.config/git
+  - ~/.config/kitty
+  - ~/.config/nix
+  - ~/.config/nvim
+  - ~/.config/pet
+  - ~/.config/tmux
+  - ~/.config/yapf
+
+- link:
+    ~/.config/nvim/init.lua: nvim/init.lua
+    ~/.config/nvim/lua: nvim/lua/
+    ~/.config/nvim/after: nvim/after
+
+    ~/.config/git/config: git/config
+    ~/.git-prompt.sh: git/git-prompt.sh
+    ~/.git-completion.sh: git/git-completion.sh
+
+    ~/.bash_profile: shells/bash/bash_profile
+    ~/.bashrc: shells/bash/bashrc
+    ~/.bashenv: shells/bash/bashenv
+    ~/.inputrc: shells/inputrc
+    ~/.zshrc: shells/zsh/zshrc
+    ~/.zshenv: shells/zsh/zshenv
+    ~/.zsh_plugins: shells/zsh/zsh_plugins
+    ~/.utils.sh: shells/utils.sh
+    ~/.config/fd/ignore: fd/ignore
+
+    ~/.config/alacritty/alacritty.yml: terminals/alacritty.yml
+    ~/.config/kitty/kitty.conf: terminals/kitty/kitty.conf
+
+    ~/.config/tmux/tmux.conf: tmux/tmux.conf
+    ~/.config/tmuxinator: tmux/tmuxinator
+    ~/.local/bin/ta.sh: tmux/ta.sh
+
+    ~/.config/yapf/style: python/yapf
+
+    ~/.ghci: haskell/ghci
+
+    ~/.config/nix/nix.conf: nix/nix.conf
+
+    ~/.config/karabiner.edn:
+      if: '[ `uname` = Darwin ]'
+      path: mac/karabiner.edn
+  
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
