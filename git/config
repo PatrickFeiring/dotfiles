@@ -18,6 +18,7 @@
     feats = "log --oneline --grep='^feats:'"
     fixes = "log --oneline --grep='^fix:'"
 
+    set-blame-file = "!git config blame.ignoreRevsFile .git-blame-ignore-revs"
     set-private-user = "!git config user.name 'Patrick Feiring' && git config user.email 'pfeiring@live.com'"
 
 [blame]
