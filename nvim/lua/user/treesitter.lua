@@ -33,6 +33,7 @@ require("nvim-treesitter.configs").setup({
         "python",
         "rust",
         "scss",
+        "svelte",
         "typescript",
         "toml",
         "tsx",

@@ -47,16 +47,6 @@ lspconfig.hls.setup({
     capabilities = capabilities,
 })
 
-lspconfig.pyright.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
-lspconfig.rust_analyzer.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
 lspconfig.lua_ls.setup({
     settings = {
         Lua = {
@@ -74,6 +64,21 @@ lspconfig.lua_ls.setup({
             },
         },
     },
+})
+
+lspconfig.pyright.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+lspconfig.rust_analyzer.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+lspconfig.svelte.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 lspconfig.volar.setup({

@@ -579,6 +579,11 @@ luasnip.add_snippets("sql", {
     s({ trig = "(%d+)", regTrig = true }, regex_capture({ prefix = "LIMIT " })),
 })
 
+luasnip.add_snippets("svelte", {
+    s("#", between('id=, "', '"')),
+    s(".", between('class="', '"')),
+})
+
 luasnip.add_snippets("vue", {
     s("sass", line_between(t('<style lang="scss" scoped>'), t("</style>"))),
     s("css", line_between(t("<style scoped>"), t("</style>"))),

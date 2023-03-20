@@ -293,6 +293,7 @@ return {
             vim.g.neoformat_enabled_html = { "prettierd" }
             vim.g.neoformat_enabled_javascript = { "prettierd" }
             vim.g.neoformat_enabled_json = { "prettierd" }
+            vim.g.neoformat_enabled_svelte = { "prettierd" }
             vim.g.neoformat_enabled_typescript = { "prettierd" }
             vim.g.neoformat_enabled_typescript_react = { "prettierd" }
             vim.g.neoformat_enabled_vue = { "prettierd" }
@@ -314,6 +315,7 @@ return {
                 nix = true,
                 python = true,
                 rust = true,
+                svelte = true,
                 toml = true,
                 typescript = true,
                 typescriptreact = true,
