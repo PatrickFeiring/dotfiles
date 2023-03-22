@@ -3,6 +3,8 @@ vim.o.updatetime = 300
 
 vim.opt.mouse = nil
 
+vim.o.wrap = false
+
 vim.o.wildmenu = true
 vim.o.wildignorecase = true
 vim.o.wildignore = vim.o.wildignore .. "*.o"
