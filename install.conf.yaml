@@ -22,6 +22,7 @@
     ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/nvim/lua: nvim/lua/
     ~/.config/nvim/after: nvim/after
+    ~/.config/nvim/templates: nvim/templates
 
     ~/.config/git/config: git/config
     ~/.git-prompt.sh: git/git-prompt.sh
