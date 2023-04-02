@@ -6,9 +6,11 @@ end
 
 local s = luasnip.snippet
 local sn = luasnip.snippet_node
-local t = luasnip.text_node
+local c = luasnip.choice_node
 local i = luasnip.insert_node
 local f = luasnip.function_node
+local t = luasnip.text_node
+local fmt = require("luasnip.extras.fmt").fmt
 
 local conditions = require("luasnip.extras.expand_conditions")
 local filetype_functions = require("luasnip.extras.filetype_functions")
@@ -698,3 +700,41 @@ vim.api.nvim_set_keymap("i", "<Tab>", "", {
 })
 
 vim.keymap.set("i", "<C-J>", "<Plug>luasnip-jump-next")
+
+-- Skeleton setups
+--
+-- We make use of luasnip as a simple templating language, in order to parameterize
+-- the templates, and to be able to jump to places where content needs to be inserted.
+local skeleton_group =
+    vim.api.nvim_create_augroup("skeletons", { clear = true })
+
+local function read_skeleton_file(name)
+    local path = vim.fn.stdpath("config") .. "/templates/" .. name
+
+    if vim.fn.filereadable(path) == 1 then
+        return table.concat(vim.fn.readfile(path), "\n")
+    else
+        return nil
+    end
+end
+
+vim.api.nvim_create_autocmd({ "BufNewFile" }, {
+    pattern = ".editorconfig",
+    group = skeleton_group,
+    callback = function(_)
+        local skeleton = read_skeleton_file("skeleton.editorconfig")
+
+        if skeleton then
+            luasnip.snip_expand(s(
+                "",
+                fmt(skeleton, {
+                    indent_style = c(1, {
+                        t("space"),
+                        t("tab"),
+                    }),
+                    indent_size = i(),
+                })
+            ))
+        end
+    end,
+})
