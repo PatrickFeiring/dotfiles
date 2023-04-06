@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/|framework$';
-import |component$ from './|component$';
+import |component$ from './|component$.|extension$';
 
 const meta = {
     component: |component$,

@@ -74,12 +74,15 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
         local current_directory = vim.fn.expand("%:p:h")
         local component_basepath = current_directory .. "/" .. component_name
 
-        local framework = nil
+        local framework
+        local extension
 
         if vim.fn.filereadable(component_basepath .. ".vue") == 1 then
             framework = "vue3"
+            extension = "vue"
         elseif vim.fn.filereadable(component_basepath .. ".svelte") == 1 then
             framework = "svelte"
+            extension = "svelte"
         else
             return
         end
@@ -89,6 +92,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
             fmt(skeleton, {
                 framework = t(framework),
                 component = t(component_name),
+                extension = t(extension),
                 default_story = i(1),
                 final_position = i(2),
             }, {
