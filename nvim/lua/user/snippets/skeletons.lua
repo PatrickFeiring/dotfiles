@@ -15,10 +15,8 @@ local i = luasnip.insert_node
 local t = luasnip.text_node
 local s = luasnip.snippet
 
-local skeleton_group = vim.api.nvim_create_augroup(
-    "skeletons",
-    { clear = true }
-)
+local skeleton_group =
+    vim.api.nvim_create_augroup("skeletons", { clear = true })
 
 local function read_skeleton_file(name)
     local path = vim.fn.stdpath("config") .. "/templates/" .. name
@@ -62,10 +60,8 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
         end
 
         local current_basename = vim.fn.expand("%:t")
-        local component_name = string.match(
-            current_basename,
-            "([^%.]*)%.stories%.ts"
-        )
+        local component_name =
+            string.match(current_basename, "([^%.]*)%.stories%.ts")
 
         if not component_name then
             return
