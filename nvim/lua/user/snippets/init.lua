@@ -6,11 +6,9 @@ end
 
 local s = luasnip.snippet
 local sn = luasnip.snippet_node
-local c = luasnip.choice_node
 local i = luasnip.insert_node
 local f = luasnip.function_node
 local t = luasnip.text_node
-local fmt = require("luasnip.extras.fmt").fmt
 
 local conditions = require("luasnip.extras.expand_conditions")
 local filetype_functions = require("luasnip.extras.filetype_functions")
