@@ -10,6 +10,7 @@ local i = luasnip.insert_node
 local f = luasnip.function_node
 local t = luasnip.text_node
 
+local c = require("user.snippets.conditions")
 local conditions = require("luasnip.extras.expand_conditions")
 local filetype_functions = require("luasnip.extras.filetype_functions")
 
@@ -308,15 +309,25 @@ local javascript_snippets = {
     s("cl", function_call("console.log")),
     s("ec", t("export const "), { condition = conditions.line_begin }),
     s("ed", t("export default "), { condition = conditions.line_begin }),
+    s("el", t("export let "), { condition = conditions.line_begin }),
     s("et", t("export type "), { condition = conditions.line_begin }),
     s("ic", {
         t("import "),
         i(1),
-        t(' from "@/components/'),
+        t(" from '@/components/"),
         f(copy, 1),
-        t('.vue;"'),
+        t(".vue';"),
     }, {
-        condition = conditions.line_begin,
+        condition = conditions.line_begin * c.filetype_is("vue"),
+    }),
+    s("ic", {
+        t("import "),
+        i(1),
+        t(" from '$lib/components/"),
+        f(copy, 1),
+        t(".svelte';"),
+    }, {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
     }),
     s(
         "id",
@@ -580,14 +591,28 @@ luasnip.add_snippets("sql", {
 })
 
 luasnip.add_snippets("svelte", {
+    s("sass", line_between(t('<style lang="sass">'), t("</style>"))),
+    s("scss", line_between(t('<style lang="scss">'), t("</style>"))),
+    s("css", line_between(t("<style>"), t("</style>"))),
+    s(
+        "js",
+        line_between(t("<script>"), t("</script>")),
+        { condition = conditions.line_begin }
+    ),
+    s(
+        "s",
+        line_between(t('<script lang="ts">'), t("</script>")),
+        { condition = conditions.line_begin }
+    ),
     s("#", between('id=, "', '"')),
     s(".", between('class="', '"')),
 })
 
 luasnip.add_snippets("vue", {
-    s("sass", line_between(t('<style lang="scss" scoped>'), t("</style>"))),
+    s("sass", line_between(t('<style lang="sass" scoped>'), t("</style>"))),
+    s("scss", line_between(t('<style lang="scss" scoped>'), t("</style>"))),
     s("css", line_between(t("<style scoped>"), t("</style>"))),
-    s("for", { t('v-for="'), i(1), t('" v-bind:key="'), i(2), t('"') }),
+    s("for", { t('v-for="'), i(1), t('" :key="'), i(2), t('"') }),
     s("if", { t('v-if="'), i(1), t('"') }),
     s(
         "ss",
@@ -602,7 +627,7 @@ luasnip.add_snippets("vue", {
         { condition = conditions.line_begin }
     ),
     s("#", between('id=, "', '"')),
-    s(".", { t('class="'), i(1), t('"') }),
+    s(".", between('class="', '"')),
 })
 
 luasnip.add_snippets("xslt", {
