@@ -11,7 +11,6 @@ return {
         end,
     },
     "lukas-reineke/indent-blankline.nvim",
-    "gpanders/editorconfig.nvim",
 
     "google/vim-maktaba",
     {
@@ -240,7 +239,6 @@ return {
     "tpope/vim-repeat",
     "tpope/vim-unimpaired",
     "tpope/vim-surround",
-    "editorconfig/editorconfig-vim",
     "tpope/vim-characterize",
 
     "andymass/vim-matchup",
