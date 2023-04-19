@@ -38,6 +38,7 @@ require("nvim-treesitter.configs").setup({
         "toml",
         "tsx",
         "vim",
+        "vimdoc",
         "vue",
         "yaml",
     },
