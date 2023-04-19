@@ -103,10 +103,6 @@ if installed then
         f:close()
     end
 
-    require("vim.treesitter.query").set_query(
-        "sql",
-        "highlights",
-        highlight_queries
-    )
-    require("vim.treesitter.query").set_query("sql", "injections", "")
+    require("vim.treesitter.query").set("sql", "highlights", highlight_queries)
+    require("vim.treesitter.query").set("sql", "injections", "")
 end
