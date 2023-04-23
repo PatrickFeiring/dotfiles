@@ -151,6 +151,15 @@ return {
                     ["tests.py"] = {
                         type = "tests",
                     },
+                    -- Svelte
+                    ["+page.ts"] = {
+                        alternate = "+page.svelte",
+                        type = "view",
+                    },
+                    ["+page.svelte"] = {
+                        alternate = "+page.ts",
+                        type = "data",
+                    },
                     -- Vue
                     ["*.vue"] = {
                         alternate = "index.vue",
