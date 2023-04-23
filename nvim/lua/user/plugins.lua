@@ -269,6 +269,7 @@ return {
             vim.cmd([[
                 imap <silent><script><expr> <C-f>a copilot#Accept("\<CR>")
                 let g:copilot_no_tab_map = v:true
+                let g:copilot_enabled = v:false
             ]])
         end,
     },
