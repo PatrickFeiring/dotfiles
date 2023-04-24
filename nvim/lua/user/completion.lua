@@ -80,3 +80,13 @@ vim.keymap.set({ "n", "i" }, "<C-x><C-x>a", function()
 
     _G._nvim_cmp_autocomplete_on = not _G._nvim_cmp_autocomplete_on
 end, { desc = "Toggle autocomplete" })
+
+vim.keymap.set({ "n", "i" }, "<C-x><C-x>c", function()
+    if vim.g.copilot_enabled then
+        vim.g.copilot_enabled = false
+        print("Copilot off")
+    else
+        vim.g.copilot_enabled = true
+        print("Copilot on")
+    end
+end, { desc = "Toggle copilot" })
