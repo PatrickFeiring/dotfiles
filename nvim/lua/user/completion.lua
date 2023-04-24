@@ -65,7 +65,7 @@ cmp.setup({
     },
 })
 
-vim.keymap.set({ "n", "i" }, "<C-x><C-x>", function()
+vim.keymap.set({ "n", "i" }, "<C-x><C-x>a", function()
     if _G._nvim_cmp_autocomplete_on then
         require("cmp").setup({
             completion = { autocomplete = false },
