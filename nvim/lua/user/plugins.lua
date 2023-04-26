@@ -414,7 +414,12 @@ return {
     { dir = "~/Documents/db-scratch.vim" },
     "edgedb/edgedb-vim",
 
-    "tpope/vim-fugitive",
+    {
+        "tpope/vim-fugitive",
+        config = function()
+            vim.keymap.set("n", "<C-G><C-G>", ":vert Git<CR>")
+        end,
+    },
     {
         "sindrets/diffview.nvim",
         dependencies = {
