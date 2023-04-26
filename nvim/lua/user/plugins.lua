@@ -46,11 +46,6 @@ return {
         end,
     },
 
-    -- Completion
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-nvim-lsp",
-
     "mfussenegger/nvim-dap",
 
     -- Window management
@@ -253,16 +248,10 @@ return {
     "andymass/vim-matchup",
     "ggandor/lightspeed.nvim",
 
-    -- Snippets
-    {
-        "mattn/emmet-vim",
-        init = function()
-            vim.g.user_emmet_leader_key = "<C-E>"
-        end,
-    },
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
-    { dir = "~/Documents/typewriter.nvim" },
+    -- Completion and snippets
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-nvim-lsp",
     {
         "github/copilot.vim",
         config = function()
@@ -271,6 +260,15 @@ return {
                 let g:copilot_no_tab_map = v:true
                 let g:copilot_enabled = v:false
             ]])
+        end,
+    },
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
+    { dir = "~/Documents/typewriter.nvim" },
+    {
+        "mattn/emmet-vim",
+        init = function()
+            vim.g.user_emmet_leader_key = "<C-E>"
         end,
     },
 
