@@ -23,6 +23,7 @@ fi
 # History settings
 HISTSIZE=10000
 HISTFILESIZE=10000
+HISTCONTROL=ignorespace
 shopt -s histappend
 # export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
