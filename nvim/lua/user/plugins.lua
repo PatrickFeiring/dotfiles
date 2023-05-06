@@ -417,8 +417,15 @@ return {
         config = function()
             vim.keymap.set("n", "<C-G><C-G>", function()
                 local windows = vim.api.nvim_list_wins()
+                local large_windows = 0
 
-                if #windows > 1 then
+                for i, h in ipairs(windows) do
+                    if vim.api.nvim_win_get_width(h) > 35 then
+                        large_windows = large_windows + 1
+                    end
+                end
+
+                if large_windows > 1 then
                     vim.cmd("Git ++curwin")
                 else
                     vim.cmd("vert Git")
