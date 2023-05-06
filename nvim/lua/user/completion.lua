@@ -4,7 +4,7 @@ if not cmp then
     return
 end
 
-_G._nvim_cmp_autocomplete_on = false
+_G._nvim_cmp_autocomplete_on = true
 
 cmp.setup({
     snippet = {
