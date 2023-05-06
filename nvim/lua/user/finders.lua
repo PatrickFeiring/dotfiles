@@ -48,3 +48,10 @@ vim.g.fzf_colors = {
     ["bg+"] = { "bg", "CursorLine", "CursorColumn" },
     ["hl+"] = { "fg", "Statement" },
 }
+
+-- Remove fzf process footer
+-- https://github.com/junegunn/fzf/issues/1143
+vim.cmd([[
+    autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+]])
