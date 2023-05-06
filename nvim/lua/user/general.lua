@@ -12,12 +12,9 @@ vim.o.wildignore = vim.o.wildignore .. "*.o"
 vim.o.shortmess = vim.o.shortmess .. "I"
 
 vim.o.statusline = ""
-vim.o.statusline = vim.o.statusline .. "%F" -- Path
+vim.o.statusline = vim.o.statusline .. "%f" -- Path
 vim.o.statusline = vim.o.statusline .. "%h%m%r%w" -- Status
 vim.o.statusline = vim.o.statusline .. "%=" -- Shift right after here
-vim.o.statusline = vim.o.statusline .. "ac: off | co: off | m:  off"
-vim.o.statusline = vim.o.statusline
-    .. "%{luaeval('_G._nvim_cmp_autocomplete_on')}"
 vim.o.statusline = vim.o.statusline .. "%y" -- File type
 
 vim.o.autoindent = true
