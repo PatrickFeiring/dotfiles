@@ -415,7 +415,15 @@ return {
     {
         "tpope/vim-fugitive",
         config = function()
-            vim.keymap.set("n", "<C-G><C-G>", ":vert Git<CR>")
+            vim.keymap.set("n", "<C-G><C-G>", function()
+                local windows = vim.api.nvim_list_wins()
+
+                if #windows > 1 then
+                    vim.cmd("Git ++curwin")
+                else
+                    vim.cmd("vert Git")
+                end
+            end)
         end,
     },
     {
