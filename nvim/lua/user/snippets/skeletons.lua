@@ -9,14 +9,18 @@ if not luasnip then
     return
 end
 
+local utils = require("user.utils")
+
 local choice = luasnip.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local i = luasnip.insert_node
 local t = luasnip.text_node
 local s = luasnip.snippet
 
-local skeleton_group =
-    vim.api.nvim_create_augroup("skeletons", { clear = true })
+local skeleton_group = vim.api.nvim_create_augroup(
+    "skeletons",
+    { clear = true }
+)
 
 local function read_skeleton_file(name)
     local path = vim.fn.stdpath("config") .. "/templates/" .. name
@@ -60,8 +64,10 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
         end
 
         local current_basename = vim.fn.expand("%:t")
-        local component_name =
-            string.match(current_basename, "([^%.]*)%.stories%.ts")
+        local component_name = string.match(
+            current_basename,
+            "([^%.]*)%.stories%.ts"
+        )
 
         if not component_name then
             return
@@ -98,25 +104,40 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
     end,
 })
 
-local function create_storybook()
+local function create_stories()
     -- If current filename has not been set, we opt out
     if vim.fn.expand("%") == "" then
         return
     end
 
-    local basename = vim.fn.expand("%:r")
-    local storybook_file = basename .. ".stories.ts"
-
     -- Make sure current extension makes sense in a storybook setting
-    local ft = vim.bo.filetype
-
-    if ft == "vue" or ft == "svelte" or ft == "ts" then
-        vim.cmd("vnew " .. storybook_file)
+    if not utils.in_table(vim.bo.filetype, { "svelte", "ts", "vue" }) then
+        return
     end
+
+    local basename = vim.fn.expand("%:r")
+
+    vim.cmd("vnew " .. basename .. ".stories.ts")
 end
 
-vim.api.nvim_create_user_command(
-    "MakeStorybook",
-    create_storybook,
-    { nargs = 0 }
-)
+vim.api.nvim_create_user_command("MakeStories", create_stories, {
+    nargs = 0,
+})
+
+local function create_tests()
+    -- If current filename has not been set, we opt out
+    if vim.fn.expand("%") == "" then
+        return
+    end
+
+    -- Make sure current extension makes sense in a storybook setting
+    if not utils.in_table(vim.bo.filetype, { "svelte", "ts", "vue" }) then
+        return
+    end
+
+    local basename = vim.fn.expand("%:r")
+
+    vim.cmd("vnew " .. basename .. ".test.ts")
+end
+
+vim.api.nvim_create_user_command("MakeTests", create_tests, { nargs = 0 })
