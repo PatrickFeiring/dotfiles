@@ -428,7 +428,7 @@ return {
                 local windows = vim.api.nvim_list_wins()
                 local large_windows = 0
 
-                for i, h in ipairs(windows) do
+                for _, h in ipairs(windows) do
                     if vim.api.nvim_win_get_width(h) > 35 then
                         large_windows = large_windows + 1
                     end
