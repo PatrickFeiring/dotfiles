@@ -93,24 +93,50 @@ return {
     -- Project
     "airblade/vim-rooter",
     {
-        "preservim/nerdtree",
+        "nvim-tree/nvim-web-devicons",
         config = function()
-            vim.g.NERDTreeIgnore = {
-                "\\.o$",
-                "\\.pyc$",
-                "^.DS_Store$",
-                "^.git$",
-                "^.mypy_cache$",
-                "^.pytest_cache$",
-                "^__pycache__$",
-                "^dist-newstyle$",
-                "^env$",
-                "^node_modules$",
-            }
-            vim.g.NERDTreeShowHidden = true
-            vim.g.NERDTreeMinimalUI = true
-            vim.api.nvim_set_keymap("n", "<leader>n", ":NERDTreeToggle<CR>", {})
-            vim.api.nvim_set_keymap("n", "<leader>N", ":NERDTreeFind<CR>", {})
+            require("nvim-web-devicons").setup({
+                -- SvelteKit icons inspired by
+                -- https://twitter.com/JohnPhamous/status/1661054406253748226/photo/1
+                override_by_filename = {
+                    ["+layout.svelte"] = {
+                        icon = "\u{ebeb}",
+                    },
+                    ["+layout.server.svelte"] = {
+                        icon = "\u{ebeb}",
+                    },
+                    ["+page.svelte"] = {
+                        icon = "\u{eae9}",
+                    },
+                    ["+page.server.ts"] = {
+                        icon = "\u{ea7b}",
+                    },
+                    ["+page.ts"] = {
+                        icon = "\u{ea7b}",
+                    },
+                },
+            })
+        end,
+    },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        config = function()
+            require("neo-tree").setup({
+                enable_git_status = false,
+                enable_diagnostics = false,
+                sort_function = utils.sort_project_paths,
+                window = {
+                    mappings = {
+                        ["o"] = "open",
+                    },
+                },
+            })
+
+            vim.api.nvim_set_keymap("n", "<leader>n", ":Neotree toggle<CR>", {})
+            vim.api.nvim_set_keymap("n", "<leader>N", ":Neotree reveal<CR>", {})
         end,
     },
     {
