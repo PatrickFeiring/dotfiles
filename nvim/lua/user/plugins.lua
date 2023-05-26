@@ -3,11 +3,14 @@ local utils = require("user.utils")
 return {
     -- Theming
     {
-        "arcticicestudio/nord-vim",
+        "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd([[colorscheme nord]])
+            require("tokyonight").setup({
+                style = "moon",
+            })
+            vim.cmd.colorscheme("tokyonight")
         end,
     },
     "lukas-reineke/indent-blankline.nvim",
