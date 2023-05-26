@@ -146,6 +146,15 @@ return {
                     ["tests.py"] = {
                         type = "tests",
                     },
+                    -- Lua
+                    ["*_spec.lua"] = {
+                        alternate = "{}.lua",
+                        type = "source",
+                    },
+                    ["*.lua"] = {
+                        alternate = "{}_spec.lua",
+                        type = "tests",
+                    },
                     -- Svelte
                     ["+page.ts"] = {
                         alternate = "+page.svelte",
