@@ -12,8 +12,12 @@
       in {
         devShells = {
           default = pkgs.mkShell {
-            buildInputs =
-              [ pkgs.luajitPackages.luacheck pkgs.nixfmt pkgs.stylua ];
+            buildInputs = [
+              pkgs.luajitPackages.busted
+              pkgs.luajitPackages.luacheck
+              pkgs.nixfmt
+              pkgs.stylua
+            ];
           };
         };
       });
