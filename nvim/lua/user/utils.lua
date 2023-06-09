@@ -1,7 +1,7 @@
 local M = {}
 
 function M.in_table(value, table)
-    for i, v in ipairs(table) do
+    for _, v in ipairs(table) do
         if v == value then
             return true
         end
