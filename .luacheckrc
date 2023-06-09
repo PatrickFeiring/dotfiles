@@ -2,6 +2,7 @@ codes = true
 
 ignore = {
     "122",
+    "631",
 }
 
 globals = {
