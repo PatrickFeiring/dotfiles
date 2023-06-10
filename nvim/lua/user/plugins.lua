@@ -25,7 +25,10 @@ return {
 
     -- Lsps
     "neovim/nvim-lspconfig",
-    "j-hui/fidget.nvim",
+    {
+        "j-hui/fidget.nvim",
+        branch = "legacy", -- Pin until rewrite is finished
+    },
     "b0o/schemastore.nvim",
 
     -- Treesitter
