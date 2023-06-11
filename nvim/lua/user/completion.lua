@@ -12,11 +12,14 @@ cmp.setup({
     },
 
     sources = {
-        { name = "nvim_lsp", option = { keyword_length = 2 } },
+        {
+            name = "nvim_lsp",
+            keyword_length = 3,
+        },
         {
             name = "buffer",
+            keyword_length = 3,
             option = {
-                keyword_length = 2,
                 get_bufnrs = function()
                     -- Fetch words not only from current buffer but from all
                     -- visible buffers
