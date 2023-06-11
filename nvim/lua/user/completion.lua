@@ -4,8 +4,6 @@ if not cmp then
     return
 end
 
-_G._nvim_cmp_autocomplete_on = true
-
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -61,9 +59,11 @@ cmp.setup({
     },
 
     completion = {
-        autocomplete = _G._nvim_cmp_autocomplete_on,
+        autocomplete = { "TextChanged" },
     },
 })
+
+_G._nvim_cmp_autocomplete_on = true
 
 vim.keymap.set({ "n", "i" }, "<C-x><C-x>a", function()
     if _G._nvim_cmp_autocomplete_on then
