@@ -488,13 +488,28 @@ return {
     },
 
     {
-        "junegunn/goyo.vim",
-        config = function()
-            vim.g.goyo_width = 100
-            vim.g.goyo_height = "95%"
-        end,
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                width = 100,
+                height = 0.95,
+                options = {
+                    number = false,
+                    relativenumber = false,
+                    signcolumn = "no",
+                },
+            },
+        },
     },
-    "junegunn/limelight.vim",
+    {
+        "folke/twilight.nvim",
+        opts = {
+            expand = {
+                "function",
+                "method",
+            },
+        },
+    },
 
     "vmchale/dhall-vim",
 }
