@@ -25,6 +25,7 @@
     ~/.config/nvim/templates: nvim/templates
 
     ~/.config/git/config: git/config
+    ~/.config/git/gitignore_global: git/gitignore_global
     ~/.git-prompt.sh: git/git-prompt.sh
     ~/.git-completion.sh: git/git-completion.sh
 

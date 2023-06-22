@@ -25,6 +25,9 @@
     markIgnoredLines = true
     markUnblamableLines = true
 
+[core]
+    excludesfile = ~/.config/git/gitignore_global
+
 [diff]
     colorMoved = zebra
 
