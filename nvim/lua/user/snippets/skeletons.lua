@@ -127,7 +127,7 @@ local function create_tests()
     end
 
     -- Make sure current extension makes sense in a test setting
-    if not utils.in_table(vim.bo.filetype, { "svelte", "ts", "vue" }) then
+    if not utils.in_table(vim.bo.filetype, { "svelte", "typescript", "vue" }) then
         return
     end
 
