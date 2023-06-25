@@ -37,19 +37,23 @@ local function applyImportCodeAction()
     })
 end
 
-local on_attach = function(_client, bufnr)
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = function(ev)
+        local opts = { buffer = ev.buf }
 
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-    vim.keymap.set("n", "<space>h", vim.lsp.buf.hover, bufopts)
-    vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, bufopts)
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
-    vim.keymap.set("n", "<space>aa", vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set("n", "<space>ai", applyImportCodeAction, bufopts)
-    vim.keymap.set("n", "<space>au", applyRemoveUnusedAction, bufopts)
-end
+        vim.keymap.set("n", "<space>h", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, opts)
+
+        vim.keymap.set("n", "<space>aa", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "<space>ai", applyImportCodeAction, opts)
+        vim.keymap.set("n", "<space>au", applyRemoveUnusedAction, opts)
+    end,
+})
 
 local capabilities = nil
 
@@ -63,7 +67,6 @@ end
 
 -- Configure individual language servers for general languages
 lspconfig.hls.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
 })
 
@@ -87,22 +90,18 @@ lspconfig.lua_ls.setup({
 })
 
 lspconfig.pyright.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
 })
 
 lspconfig.rust_analyzer.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
 })
 
 lspconfig.svelte.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
 })
 
 lspconfig.volar.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     filetypes = {
         "typescript",
@@ -117,7 +116,6 @@ lspconfig.volar.setup({
 local schemastore = prequire("schemastore")
 
 lspconfig.dhall_lsp_server.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
 })
 
@@ -135,7 +133,6 @@ if schemastore then
 end
 
 lspconfig.jsonls.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     settings = {
         json = {
@@ -161,7 +158,6 @@ if schemastore then
 end
 
 lspconfig.yamlls.setup({
-    on_attach = on_attach,
     capabilities = capabilities,
     settings = {
         yaml = {
