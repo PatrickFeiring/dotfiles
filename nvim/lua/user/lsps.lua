@@ -20,6 +20,24 @@ vim.keymap.set("n", "<space>f", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 
+local function applyRemoveUnusedAction()
+    vim.lsp.buf.code_action({
+        filter = function(action)
+            return action.title:lower():find("remove")
+        end,
+        apply = true,
+    })
+end
+
+local function applyImportCodeAction()
+    vim.lsp.buf.code_action({
+        filter = function(action)
+            return action.title:lower():find("import")
+        end,
+        apply = true,
+    })
+end
+
 local on_attach = function(_client, bufnr)
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -28,7 +46,10 @@ local on_attach = function(_client, bufnr)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
     vim.keymap.set("n", "<space>h", vim.lsp.buf.hover, bufopts)
     vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, bufopts)
-    vim.keymap.set("n", "<space>a", vim.lsp.buf.code_action, bufopts)
+
+    vim.keymap.set("n", "<space>aa", vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set("n", "<space>ai", applyImportCodeAction, bufopts)
+    vim.keymap.set("n", "<space>au", applyRemoveUnusedAction, bufopts)
 end
 
 local capabilities = nil
