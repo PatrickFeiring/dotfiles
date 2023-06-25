@@ -49,9 +49,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<space>h", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, opts)
 
-        vim.keymap.set("n", "<space>aa", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "<space>ai", applyImportCodeAction, opts)
-        vim.keymap.set("n", "<space>au", applyRemoveUnusedAction, opts)
+        vim.keymap.set({ "n", "v" }, "<space>aa", vim.lsp.buf.code_action, opts)
+        vim.keymap.set({ "n", "v" }, "<space>ai", applyImportCodeAction, opts)
+        vim.keymap.set({ "n", "v" }, "<space>au", applyRemoveUnusedAction, opts)
     end,
 })
 
