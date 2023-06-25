@@ -19,22 +19,29 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<space>f", vim.diagnostic.open_float)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
-local function applyRemoveUnusedAction()
-    vim.lsp.buf.code_action({
-        filter = function(action)
-            return action.title:lower():find("remove")
-        end,
-        apply = true,
-    })
-end
+local function applyCodeActionWithFilter(titleFilter)
+    return function()
+        -- As code actions depends on cursor position, we move to the
+        -- diagnostic, as this is used to fix issues, not for refactoring etc.
+        local line, _ = unpack(vim.api.nvim_win_get_cursor(0))
+        local diagnostics = vim.diagnostic.get(0, {
+            lnum = line - 1,
+        })
 
-local function applyImportCodeAction()
-    vim.lsp.buf.code_action({
-        filter = function(action)
-            return action.title:lower():find("import")
-        end,
-        apply = true,
-    })
+        if #diagnostics > 0 then
+            vim.api.nvim_win_set_cursor(0, {
+                diagnostics[1].lnum + 1,
+                diagnostics[1].col,
+            })
+
+            vim.lsp.buf.code_action({
+                filter = function(action)
+                    return action.title:lower():find(titleFilter)
+                end,
+                apply = true,
+            })
+        end
+    end
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -50,8 +57,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, opts)
 
         vim.keymap.set({ "n", "v" }, "<space>aa", vim.lsp.buf.code_action, opts)
-        vim.keymap.set({ "n", "v" }, "<space>ai", applyImportCodeAction, opts)
-        vim.keymap.set({ "n", "v" }, "<space>au", applyRemoveUnusedAction, opts)
+        vim.keymap.set(
+            { "n", "v" },
+            "<space>ai",
+            applyCodeActionWithFilter("add import"),
+            opts
+        )
+        vim.keymap.set(
+            { "n", "v" },
+            "<space>au",
+            applyCodeActionWithFilter("remove unused declaration"),
+            opts
+        )
     end,
 })
 
