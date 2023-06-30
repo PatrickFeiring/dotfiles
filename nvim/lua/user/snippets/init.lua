@@ -301,12 +301,26 @@ luasnip.add_snippets("java", {
 })
 
 local javascript_snippets = {
+    s("computed", between("computed(() => ", ");")),
+    s("testa", line_between(between("test('", "', async () => {"), t("})"))),
+    s("comp", between("computed(() => ", ");")),
+    s("desc", line_between(between("describe('", "', () => {"), t("})"))),
+    s("test", line_between(between("test('", "', () => {"), t("})"))),
     s(
         "edf",
         t("export default function "),
         { condition = conditions.line_begin }
     ),
     s("cl", function_call("console.log")),
+    s("dp", {
+        t("defineProps<> "),
+        i(1),
+        t(" from '@/components/"),
+        f(copy, 1),
+        t(".vue';"),
+    }, {
+        condition = conditions.line_begin * c.filetype_is("vue"),
+    }),
     s("ec", t("export const "), { condition = conditions.line_begin }),
     s("ed", t("export default "), { condition = conditions.line_begin }),
     s("el", t("export let "), { condition = conditions.line_begin }),
@@ -358,6 +372,7 @@ local javascript_snippets = {
         { condition = conditions.line_begin }
     ),
     s("r", t("return")),
+    s("t", between("`", "`")),
 }
 
 luasnip.add_snippets("javascript", javascript_snippets)
