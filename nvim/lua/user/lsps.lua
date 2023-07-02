@@ -19,28 +19,50 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<space>f", vim.diagnostic.open_float)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
-local function applyCodeActionWithFilter(titleFilter)
+local function get_diagnostic_under_cursor()
+    local line, row = unpack(vim.api.nvim_win_get_cursor(0))
+    local diagnostics = vim.diagnostic.get(0, {
+        lnum = line - 1,
+    })
+
+    if #diagnostics == 0 then
+        return
+    end
+
+    for _, diagnostic in ipairs(diagnostics) do
+        if row >= diagnostic.col and row < diagnostic.end_col then
+            return diagnostic
+        end
+    end
+
+    return nil
+end
+
+local function apply_code_action_to_next_diagnostic(titleFilter)
     return function()
         -- As code actions depends on cursor position, we move to the
         -- diagnostic, as this is used to fix issues, not for refactoring etc.
-        local line, _ = unpack(vim.api.nvim_win_get_cursor(0))
-        local diagnostics = vim.diagnostic.get(0, {
-            lnum = line - 1,
-        })
+        local diagnostic = get_diagnostic_under_cursor()
 
-        if #diagnostics > 0 then
+        if not diagnostic then
+            diagnostic = vim.diagnostic.get_next()
+
+            if not diagnostic then
+                return
+            end
+
             vim.api.nvim_win_set_cursor(0, {
-                diagnostics[1].lnum + 1,
-                diagnostics[1].col,
-            })
-
-            vim.lsp.buf.code_action({
-                filter = function(action)
-                    return action.title:lower():find(titleFilter)
-                end,
-                apply = true,
+                diagnostic.lnum + 1,
+                diagnostic.col,
             })
         end
+
+        vim.lsp.buf.code_action({
+            filter = function(action)
+                return action.title:lower():find(titleFilter)
+            end,
+            apply = true,
+        })
     end
 end
 
@@ -60,13 +82,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set(
             { "n", "v" },
             "<space>ai",
-            applyCodeActionWithFilter("add import"),
+            apply_code_action_to_next_diagnostic("add import"),
             opts
         )
         vim.keymap.set(
             { "n", "v" },
             "<space>au",
-            applyCodeActionWithFilter("remove unused declaration"),
+            apply_code_action_to_next_diagnostic("remove unused declaration"),
             opts
         )
     end,
