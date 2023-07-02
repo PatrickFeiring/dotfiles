@@ -606,9 +606,19 @@ luasnip.add_snippets("sql", {
 })
 
 luasnip.add_snippets("svelte", {
+    s(
+        "eachs",
+        line_between(
+            sn(1, { t("{#each "), i(1), t("s as "), f(copy, 1), t("}") }),
+            t("{/each}")
+        )
+    ),
+    s("each", line_between(between("{#each ", " as ", "}"), t("{/each}"))),
+    s("else", between("{:else ", " }")),
     s("sass", line_between(t('<style lang="sass">'), t("</style>"))),
     s("scss", line_between(t('<style lang="scss">'), t("</style>"))),
     s("css", line_between(t("<style>"), t("</style>"))),
+    s("if", line_between(between("{#if ", "}"), t("{/if}"))),
     s(
         "js",
         line_between(t("<script>"), t("</script>")),
