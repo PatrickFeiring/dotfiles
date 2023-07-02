@@ -55,3 +55,11 @@ vim.cmd([[
     autocmd  FileType fzf set laststatus=0 noshowmode noruler
     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 ]])
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.argv(0) == "" then
+            vim.cmd("Files")
+        end
+    end,
+})
