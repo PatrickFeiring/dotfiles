@@ -9,8 +9,6 @@ if not luasnip then
     return
 end
 
-local utils = require("user.utils")
-
 local choice = luasnip.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
 local i = luasnip.insert_node
