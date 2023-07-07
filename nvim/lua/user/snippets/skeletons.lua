@@ -103,11 +103,18 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
 local function create_stories()
     -- If current filename has not been set, we opt out
     if vim.fn.expand("%") == "" then
+        print("Can not setup stories for unsaved file")
         return
     end
 
     -- Make sure current extension makes sense in a storybook setting
     if not vim.tbl_contains({ "svelte", "vue" }, vim.bo.filetype) then
+        print(
+            string.format(
+                "Can not setup stories for file type %s",
+                vim.bo.filetype
+            )
+        )
         return
     end
 
@@ -123,6 +130,7 @@ vim.api.nvim_create_user_command("MakeStories", create_stories, {
 local function create_tests()
     -- If current filename has not been set, we opt out
     if vim.fn.expand("%") == "" then
+        print("Can not setup tests for unsaved file")
         return
     end
 
@@ -130,6 +138,12 @@ local function create_tests()
     if
         not vim.tbl_contains({ "svelte", "typescript", "vue" }, vim.bo.filetype)
     then
+        print(
+            string.format(
+                "Can not setup tests for file type %s",
+                vim.bo.filetype
+            )
+        )
         return
     end
 
