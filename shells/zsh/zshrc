@@ -77,10 +77,6 @@ zle -N pet-select
 stty -ixon
 bindkey '^s' pet-select
 
-# Manage plugins with antibody
-source <(antibody init)
-antibody bundle < ~/.zsh_plugins
-
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 if [ -n "${commands[fzf-share]}" ]; then
@@ -97,3 +93,5 @@ fi
 
 # opam configuration
 [[ ! -r /Users/pfeiring/.opam/opam-init/init.zsh ]] || source /Users/pfeiring/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+[[ ! -r /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] || source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  > /dev/null 2> /dev/null
