@@ -9,6 +9,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const |default_story$ = {
-    |final_position$
+    args: {
+        |final_position$
+    }
 } satisfies Story;
 
