@@ -1,15 +1,5 @@
 local M = {}
 
-function M.in_table(value, table)
-    for _, v in ipairs(table) do
-        if v == value then
-            return true
-        end
-    end
-
-    return false
-end
-
 function M.get_tools_listed_in_pyproject()
     local tools = {
         black = false,

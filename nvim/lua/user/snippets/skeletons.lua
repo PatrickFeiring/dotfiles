@@ -107,7 +107,7 @@ local function create_stories()
     end
 
     -- Make sure current extension makes sense in a storybook setting
-    if not utils.in_table(vim.bo.filetype, { "svelte", "ts", "vue" }) then
+    if not vim.tbl_contains({ "svelte", "vue" }, vim.bo.filetype) then
         return
     end
 
@@ -128,7 +128,7 @@ local function create_tests()
 
     -- Make sure current extension makes sense in a test setting
     if
-        not utils.in_table(vim.bo.filetype, { "svelte", "typescript", "vue" })
+        not vim.tbl_contains({ "svelte", "typescript", "vue" }, vim.bo.filetype)
     then
         return
     end
