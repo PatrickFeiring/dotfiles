@@ -55,12 +55,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
     pattern = "*.stories.ts",
     group = skeleton_group,
     callback = function(_)
-        local skeleton = read_skeleton_file("skeleton.stories.ts")
-
-        if not skeleton then
-            return
-        end
-
         local current_basename = vim.fn.expand("%:t")
         local component_name =
             string.match(current_basename, "([^%.]*)%.stories%.ts")
@@ -71,26 +65,22 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
 
         local current_directory = vim.fn.expand("%:p:h")
         local component_basepath = current_directory .. "/" .. component_name
-
-        local framework
-        local extension
+        local template_content
 
         if vim.fn.filereadable(component_basepath .. ".vue") == 1 then
-            framework = "vue3"
-            extension = "vue"
+            template_content = read_skeleton_file("vue.stories.ts")
         elseif vim.fn.filereadable(component_basepath .. ".svelte") == 1 then
-            framework = "svelte"
-            extension = "svelte"
-        else
+            template_content = read_skeleton_file("svelte.stories.ts")
+        end
+
+        if not template_content then
             return
         end
 
         luasnip.snip_expand(s(
             "",
-            fmt(skeleton, {
-                framework = t(framework),
+            fmt(template_content, {
                 component = t(component_name),
-                extension = t(extension),
                 default_story = i(1),
                 final_position = i(2),
             }, {

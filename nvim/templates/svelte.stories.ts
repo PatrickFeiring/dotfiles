@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/|framework$';
-import |component$ from './|component$.|extension$';
+import type { Meta, StoryObj } from '@storybook/svelte';
+import |component$ from './|component$.svelte';
 
 const meta = {
     component: |component$,
-} satisfies Meta<typeof |component$>;
+} satisfies Meta<|component$>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -11,3 +11,4 @@ type Story = StoryObj<typeof meta>;
 export const |default_story$ = {
     |final_position$
 } satisfies Story;
+
