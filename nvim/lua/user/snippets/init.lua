@@ -340,6 +340,7 @@ local javascript_snippets = {
         t("import "),
         i(1),
         t(" from '@/components/"),
+        i(2),
         f(copy, 1),
         t(".vue';"),
     }, {
@@ -349,6 +350,7 @@ local javascript_snippets = {
         t("import "),
         i(1),
         t(" from '$lib/components/"),
+        i(2),
         f(copy, 1),
         t(".svelte';"),
     }, {
