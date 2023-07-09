@@ -325,6 +325,17 @@ local javascript_snippets = {
     s("ed", t("export default "), { condition = conditions.line_begin }),
     s("el", t("export let "), { condition = conditions.line_begin }),
     s("et", t("export type "), { condition = conditions.line_begin }),
+    s("ia", {
+        t("import "),
+        i(1),
+        t(" from '$lib/assets/"),
+        i(2),
+        f(copy, 1),
+        i(3),
+        t("';"),
+    }, {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
     s("ic", {
         t("import "),
         i(1),
