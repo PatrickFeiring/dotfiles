@@ -88,6 +88,10 @@ if [ -n "${commands[direnv]}" ]; then
   eval "$(direnv hook zsh)"
 fi
 
+if [ -n "${commands[fnm]}" ]; then
+  eval "$(fnm env --use-on-cd)"
+fi
+
 [ -f ~/.ghcup/env ] && source ~/.ghcup/env
 [ -f ~/.utils.sh ] && source ~/.utils.sh
 
