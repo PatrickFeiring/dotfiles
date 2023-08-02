@@ -48,6 +48,8 @@
     ~/.config/tmuxinator: tmux/tmuxinator
     ~/.local/bin/ta.sh: tmux/ta.sh
 
+    ~/.psqlrc: databases/psqlrc
+
     ~/.config/yapf/style: python/yapf
 
     ~/.ghci: haskell/ghci
