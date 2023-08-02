@@ -619,6 +619,7 @@ luasnip.add_snippets("sql", {
 })
 
 luasnip.add_snippets("svelte", {
+    s("elseif", between("{:else if ", "}")),
     s(
         "eachs",
         line_between(
@@ -627,7 +628,7 @@ luasnip.add_snippets("svelte", {
         )
     ),
     s("each", line_between(between("{#each ", " as ", "}"), t("{/each}"))),
-    s("else", between("{:else ", " }")),
+    s("else", between("{:else ", "}")),
     s("sass", line_between(t('<style lang="sass">'), t("</style>"))),
     s("scss", line_between(t('<style lang="scss">'), t("</style>"))),
     s("css", line_between(t("<style>"), t("</style>"))),
@@ -635,6 +636,11 @@ luasnip.add_snippets("svelte", {
     s(
         "js",
         line_between(t("<script>"), t("</script>")),
+        { condition = conditions.line_begin }
+    ),
+    s(
+        "sm",
+        line_between(t('<script lang="ts" context="module">'), t("</script>")),
         { condition = conditions.line_begin }
     ),
     s(
