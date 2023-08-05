@@ -136,6 +136,15 @@ return {
                         ["o"] = "open",
                     },
                 },
+                filesystem = {
+                    filtered_items = {
+                        visible = false,
+                        hide_dotfiles = false,
+                        hide_gitignored = true,
+                        hide_by_name = { ".git" },
+                        show_hidden_count = false,
+                    },
+                },
             })
 
             vim.api.nvim_set_keymap("n", "<leader>n", ":Neotree toggle<CR>", {})
