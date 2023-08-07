@@ -55,8 +55,8 @@ local special_files_sort_order = {
     ["+layout.svelte"] = 4,
     ["+page.server.ts"] = 5,
     ["+page.ts"] = 6,
-    ["+page.svelte"] = 7,
-    ["+error.svelte"] = 8,
+    ["+error.svelte"] = 7,
+    ["+page.svelte"] = 8,
 }
 
 local function get_sort_order_special_file(a)

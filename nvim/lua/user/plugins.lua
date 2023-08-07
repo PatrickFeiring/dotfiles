@@ -102,19 +102,28 @@ return {
                 -- SvelteKit icons inspired by
                 -- https://twitter.com/JohnPhamous/status/1661054406253748226/photo/1
                 override_by_filename = {
+                    ["+server.ts"] = {
+                        icon = "\u{eae9}",
+                    },
+                    ["+layout.server.ts"] = {
+                        icon = "\u{ebeb}",
+                    },
+                    ["+layout.ts"] = {
+                        icon = "\u{ebeb}",
+                    },
                     ["+layout.svelte"] = {
                         icon = "\u{ebeb}",
-                    },
-                    ["+layout.server.svelte"] = {
-                        icon = "\u{ebeb}",
-                    },
-                    ["+page.svelte"] = {
-                        icon = "\u{eae9}",
                     },
                     ["+page.server.ts"] = {
                         icon = "\u{ea7b}",
                     },
                     ["+page.ts"] = {
+                        icon = "\u{ea7b}",
+                    },
+                    ["+error.svelte"] = {
+                        icon = "\u{ea7b}",
+                    },
+                    ["+page.svelte"] = {
                         icon = "\u{ea7b}",
                     },
                 },
