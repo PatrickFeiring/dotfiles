@@ -49,12 +49,14 @@ end
 
 ---Define custom sort order for certain filenames
 local special_files_sort_order = {
-    ["+layout.server.ts"] = 1,
-    ["+layout.ts"] = 2,
-    ["+layout.svelte"] = 3,
-    ["+page.server.ts"] = 4,
-    ["+page.ts"] = 5,
-    ["+page.svelte"] = 6,
+    ["+server.ts"] = 1,
+    ["+layout.server.ts"] = 2,
+    ["+layout.ts"] = 3,
+    ["+layout.svelte"] = 4,
+    ["+page.server.ts"] = 5,
+    ["+page.ts"] = 6,
+    ["+page.svelte"] = 7,
+    ["+error.svelte"] = 8,
 }
 
 local function get_sort_order_special_file(a)
