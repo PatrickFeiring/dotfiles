@@ -15,7 +15,7 @@ vim.keymap.set("v", "<leader>T", 'y:Tags<Space><C-R>"<CR>')
 vim.cmd([[
     function! s:list_cmd()
         let base = fnamemodify(expand('%'), ':h:.:S')
-        return base == '.' ? 'fd --type f --hidden' : printf('fd --type f --hidden | proximity-sort %s', expand('%'))
+        return base == '.' ? 'fd --type f --hidden' : printf('fd --type f --hidden | proximity-sort %s', shellescape(expand('%')))
     endfunction
 
     command! -bang -nargs=? -complete=dir Files
