@@ -156,8 +156,8 @@ return {
                 },
             })
 
-            vim.api.nvim_set_keymap("n", "<leader>n", ":Neotree toggle<CR>", {})
-            vim.api.nvim_set_keymap("n", "<leader>N", ":Neotree reveal<CR>", {})
+            vim.api.nvim_set_keymap("n", "<leader>n", ":Neotree reveal<CR>", {})
+            vim.api.nvim_set_keymap("n", "<leader>N", ":Neotree toggle<CR>", {})
         end,
     },
     {
