@@ -311,6 +311,15 @@ local javascript_snippets = {
         t("export default function "),
         { condition = conditions.line_begin }
     ),
+    s("isk", {
+        t("import { "),
+        i(1),
+        t(" } from '@sveltejs/kit"),
+        t("';"),
+    }, {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
+    s("aa", between("async (", ") => {", "}")),
     s("cl", function_call("console.log")),
     s("dp", {
         t("defineProps<> "),
@@ -361,6 +370,13 @@ local javascript_snippets = {
         between("import ", " from ", ";"),
         { condition = conditions.line_begin }
     ),
+    s("il", {
+        t("import "),
+        i(1),
+        t(" from '$lib/"),
+        i(2),
+        t("';"),
+    }, { condition = conditions.line_begin }),
     s(
         "it",
         between("import type { ", ' } from "', '";'),
