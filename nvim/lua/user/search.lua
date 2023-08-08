@@ -4,6 +4,4 @@ vim.o.smartcase = true
 vim.o.hlsearch = true
 vim.o.incsearch = true
 
-vim.cmd([[
-    nnoremap <CR> :noh<CR><CR>
-]])
+vim.keymap.set("n", "<CR>", ":noh<CR><CR>")
