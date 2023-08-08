@@ -42,6 +42,57 @@ function M.has_project_file(path)
     return true
 end
 
+local groups = {
+    {
+        "+layout.server.ts",
+        "+layout.ts",
+        "+layout.svelte",
+    },
+    {
+        "+page.server.ts",
+        "+page.ts",
+        "+page.svelte",
+    },
+}
+
+function M.cycle_file_group(direction)
+    direction = direction or "forward"
+
+    local file_path = vim.fn.expand("%")
+
+    local directory = vim.fn.fnamemodify(file_path, ":h")
+    local basename = vim.fn.fnamemodify(file_path, ":t")
+
+    for _, group in ipairs(groups) do
+        for i, target_filename in ipairs(group) do
+            if target_filename == basename then
+                local start, stop, step
+
+                if direction == "backward" then
+                    start = i - 1
+                    stop = 1
+                    step = -1
+                else
+                    start = i + 1
+                    stop = #group
+                    step = 1
+                end
+
+                for j = start, stop, step do
+                    local path = directory .. "/" .. group[j]
+
+                    if vim.fn.filereadable(path) == 1 then
+                        vim.cmd("edit " .. path)
+                        return
+                    end
+                end
+
+                return
+            end
+        end
+    end
+end
+
 local function are_paths_in_routes(a, b)
     return string.find(a.path, "src/routes/")
         and string.find(b.path, "src/routes/")
