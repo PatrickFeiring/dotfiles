@@ -47,17 +47,15 @@ local function are_paths_in_routes(a, b)
         and string.find(b.path, "src/routes/")
 end
 
-local groups = {
-    {
-        "+server.ts",
-        "+layout.server.ts",
-        "+layout.ts",
-        "+layout.svelte",
-        "+page.server.ts",
-        "+page.ts",
-        "+error.svelte",
-        "+page.svelte",
-    },
+local filename_order = {
+    "+server.ts",
+    "+layout.server.ts",
+    "+layout.ts",
+    "+layout.svelte",
+    "+page.server.ts",
+    "+page.ts",
+    "+error.svelte",
+    "+page.svelte",
 }
 
 local function get_sort_order_by_filename(a)
@@ -65,13 +63,11 @@ local function get_sort_order_by_filename(a)
         -- We could have done this with vim.fn.expand, but
         -- for now we'll try to avoid depending on neovim
         -- in this file
-        local _, filename = a.path:match("(.*/)(.*)")
+        local _, target_filename = a.path:match("(.*/)(.*)")
 
-        for _, group in ipairs(groups) do
-            for i, target_filename in ipairs(group) do
-                if filename == target_filename then
-                    return i
-                end
+        for i, filename in ipairs(filename_order) do
+            if target_filename == filename then
+                return i
             end
         end
 
