@@ -47,28 +47,35 @@ local function are_paths_in_routes(a, b)
         and string.find(b.path, "src/routes/")
 end
 
----Define custom sort order for certain filenames
-local special_files_sort_order = {
-    ["+server.ts"] = 1,
-    ["+layout.server.ts"] = 2,
-    ["+layout.ts"] = 3,
-    ["+layout.svelte"] = 4,
-    ["+page.server.ts"] = 5,
-    ["+page.ts"] = 6,
-    ["+error.svelte"] = 7,
-    ["+page.svelte"] = 8,
+local groups = {
+    {
+        "+server.ts",
+        "+layout.server.ts",
+        "+layout.ts",
+        "+layout.svelte",
+        "+page.server.ts",
+        "+page.ts",
+        "+error.svelte",
+        "+page.svelte",
+    },
 }
 
-local function get_sort_order_special_file(a)
+local function get_sort_order_by_filename(a)
     if a.type == "file" then
         -- We could have done this with vim.fn.expand, but
         -- for now we'll try to avoid depending on neovim
         -- in this file
         local _, filename = a.path:match("(.*/)(.*)")
 
-        if filename then
-            return special_files_sort_order[filename]
+        for _, group in ipairs(groups) do
+            for i, target_filename in ipairs(group) do
+                if filename == target_filename then
+                    return i
+                end
+            end
         end
+
+        return 0
     end
 end
 
@@ -90,8 +97,8 @@ end
 
 ---Sort project paths
 function M.sort_project_paths(a, b)
-    local special_a = get_sort_order_special_file(a)
-    local special_b = get_sort_order_special_file(b)
+    local special_a = get_sort_order_by_filename(a)
+    local special_b = get_sort_order_by_filename(b)
 
     if special_a and special_b then
         return special_a < special_b
