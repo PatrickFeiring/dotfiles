@@ -644,7 +644,7 @@ luasnip.add_snippets("svelte", {
         )
     ),
     s("each", line_between(between("{#each ", " as ", "}"), t("{/each}"))),
-    s("else", between("{:else ", "}")),
+    s("else", t("{:else}")),
     s("sass", line_between(t('<style lang="sass">'), t("</style>"))),
     s("scss", line_between(t('<style lang="scss">'), t("</style>"))),
     s("css", line_between(t("<style>"), t("</style>"))),
