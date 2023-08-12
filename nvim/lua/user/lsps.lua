@@ -145,15 +145,12 @@ lspconfig.svelte.setup({
     capabilities = capabilities,
 })
 
+lspconfig.tsserver.setup({
+    capabilities = capabilities,
+})
+
 lspconfig.volar.setup({
     capabilities = capabilities,
-    filetypes = {
-        "typescript",
-        "javascript",
-        "javascriptreact",
-        "typescriptreact",
-        "vue",
-    },
 })
 
 -- Configure individual language servers for configuration languages
