@@ -12,6 +12,9 @@
     set-blame-file = "!git config blame.ignoreRevsFile .git-blame-ignore-revs"
     set-private-user = "!git config user.name 'Patrick Feiring' && git config user.email 'pfeiring@live.com'"
 
+    sync-main = "!git fetch origin main:main"
+    sync-master = "!git fetch origin master:master"
+
 [blame]
     markIgnoredLines = true
     markUnblamableLines = true
