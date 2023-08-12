@@ -1,11 +1,6 @@
 [alias]
-    ads = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
-    ap = "!git add -p "
     b = branch
-    ba = branch -a
     c = commit
-    cm = "!git commit -m "
-    cane = commit --amend --no-edit
     d = diff
     dc = diff --cached
     l = "log --format='%C(auto) %h %d %s'"
@@ -13,10 +8,6 @@
     shh = show HEAD
     st = status
     sw = switch
-
-    # Conventional commit filters
-    feats = "log --oneline --grep='^feats:'"
-    fixes = "log --oneline --grep='^fix:'"
 
     set-blame-file = "!git config blame.ignoreRevsFile .git-blame-ignore-revs"
     set-private-user = "!git config user.name 'Patrick Feiring' && git config user.email 'pfeiring@live.com'"
