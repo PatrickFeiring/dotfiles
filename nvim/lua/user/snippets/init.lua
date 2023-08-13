@@ -302,22 +302,28 @@ luasnip.add_snippets("java", {
 
 local javascript_snippets = {
     s("computed", between("computed(() => ", ");")),
+    s(
+        "loada",
+        line_between(between("export const load = async (", ") => {"), t("}"))
+    ),
     s("testa", line_between(between("test('", "', async () => {"), t("})"))),
     s("comp", between("computed(() => ", ");")),
     s("desc", line_between(between("describe('", "', () => {"), t("})"))),
+    s("load", line_between(between("export const load = (", ") => {"), t("}"))),
     s("test", line_between(between("test('", "', () => {"), t("})"))),
     s(
         "edf",
         t("export default function "),
         { condition = conditions.line_begin }
     ),
+    s("eld", t("export let data;"), { condition = conditions.line_begin }),
     s("isk", {
         t("import { "),
         i(1),
         t(" } from '@sveltejs/kit"),
         t("';"),
     }, {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin,
     }),
     s("aa", between("async (", ") => {", "}")),
     s("cl", function_call("console.log")),
