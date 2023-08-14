@@ -778,10 +778,10 @@ end
 vim.api.nvim_set_keymap("i", "<Tab>", "", {
     expr = true,
     callback = function()
-        if typewriter and typewriter.expandable() then
-            return replace_termcodes("<Plug>typewriter-expand")
-        elseif luasnip and luasnip.expandable() then
+        if luasnip and luasnip.expandable() then
             return replace_termcodes("<Plug>luasnip-expand-snippet")
+        elseif typewriter and typewriter.expandable() then
+            return replace_termcodes("<Plug>typewriter-expand")
         else
             return replace_termcodes("<Tab>")
         end
