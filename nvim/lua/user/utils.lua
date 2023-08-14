@@ -121,9 +121,9 @@ local function get_sort_order_by_filename(a)
                 return i
             end
         end
-
-        return 0
     end
+
+    return 0
 end
 
 local function sort_directories_first(a, b)
@@ -147,7 +147,7 @@ function M.sort_project_paths(a, b)
     local special_a = get_sort_order_by_filename(a)
     local special_b = get_sort_order_by_filename(b)
 
-    if special_a and special_b then
+    if special_a ~= special_b then
         return special_a < special_b
     end
 
