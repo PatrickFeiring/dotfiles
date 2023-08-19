@@ -93,6 +93,33 @@ function M.cycle_file_group(direction)
     end
 end
 
+function M.parse_path(path)
+    local directory, basename = path:match("(.*/)(.*)")
+
+    if not directory then
+        basename = path
+    end
+
+    local stem = basename
+    local extensions
+
+    local i = basename:find("%.")
+
+    if i then
+        stem = basename:sub(1, i - 1)
+        extensions = basename:sub(i + 1)
+    else
+        stem = basename
+    end
+
+    return {
+        directory = directory,
+        basename = basename,
+        stem = stem,
+        extensions = extensions,
+    }
+end
+
 local function are_paths_in_routes(a, b)
     return string.find(a.path, "src/routes/")
         and string.find(b.path, "src/routes/")
