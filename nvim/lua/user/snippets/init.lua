@@ -393,9 +393,9 @@ local javascript_snippets = {
         { t("import "), i(1), t(' from "@/views/"'), f(copy, 1), t(".vue;") },
         { condition = conditions.line_begin }
     ),
-    s("oe", function_call("Object.entries")),
-    s("ok", function_call("Object.keys")),
-    s("ov", function_call("Object.values")),
+    s("oe", function_call_no_semicolon("Object.entries")),
+    s("ok", function_call_no_semicolon("Object.keys")),
+    s("ov", function_call_no_semicolon("Object.values")),
     s("rf", t("return false;")),
     s("rn", t("return null;")),
     s("rt", t("return true;")),
@@ -406,7 +406,7 @@ local javascript_snippets = {
         { t("import { "), i(1), t(" } from '"), i(2), t("';") },
         { condition = conditions.line_begin }
     ),
-    s("r", t("return")),
+    s("r", between("return", ";")),
     s("t", between("`", "`")),
 }
 
@@ -654,6 +654,7 @@ luasnip.add_snippets("svelte", {
     s("sass", line_between(t('<style lang="sass">'), t("</style>"))),
     s("scss", line_between(t('<style lang="scss">'), t("</style>"))),
     s("css", line_between(t("<style>"), t("</style>"))),
+    s("key", line_between(between("{#key ", "}"), t("{/key}"))),
     s("if", line_between(between("{#if ", "}"), t("{/if}"))),
     s(
         "js",
