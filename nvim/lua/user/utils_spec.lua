@@ -67,4 +67,14 @@ describe("project path sorting", function()
             path = "src/routes/+page.ts",
         }))
     end)
+
+    it("orders stories after source", function()
+        assert.is_true(utils.sort_project_paths({
+            type = "file",
+            path = "src/routes/Test.svelte",
+        }, {
+            type = "file",
+            path = "src/routes/Test.stories.ts",
+        }))
+    end)
 end)

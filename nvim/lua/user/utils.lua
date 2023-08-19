@@ -146,21 +146,50 @@ local filename_order = {
     "+page.svelte",
 }
 
-local function get_sort_order_by_filename(a)
+local function get_sort_score_by_filename(a)
     if a.type == "file" then
-        -- We could have done this with vim.fn.expand, but
-        -- for now we'll try to avoid depending on neovim
-        -- in this file
-        local _, target_filename = a.path:match("(.*/)(.*)")
+        local path = M.parse_path(a.path)
 
         for i, filename in ipairs(filename_order) do
-            if target_filename == filename then
+            if path.basename == filename then
                 return i
             end
         end
     end
 
     return #filename_order + 1
+end
+
+local extensions_order = {
+    "vue",
+    "svelte",
+    "stories.ts",
+}
+
+local function get_sort_score_by_extension(target_extensions)
+    for i, extensions in ipairs(extensions_order) do
+        if target_extensions == extensions then
+            return i
+        end
+    end
+
+    return #extensions_order + 1
+end
+
+local function get_relative_sort_score_by_extensions(a, b)
+    if a.type == "file" and b.type == "file" then
+        local a_path = M.parse_path(a.path)
+        local b_path = M.parse_path(b.path)
+
+        if a_path.stem ~= b_path.stem then
+            return 0
+        end
+
+        return get_sort_score_by_extension(a_path.extensions)
+            - get_sort_score_by_extension(b_path.extensions)
+    end
+
+    return 0
 end
 
 ---Sort project paths
@@ -177,11 +206,18 @@ function M.sort_project_paths(a, b)
         return score_difference < 0
     end
 
-    local filename_score_difference = get_sort_order_by_filename(a)
-        - get_sort_order_by_filename(b)
+    local filename_score_difference = get_sort_score_by_filename(a)
+        - get_sort_score_by_filename(b)
 
     if filename_score_difference ~= 0 then
         return filename_score_difference < 0
+    end
+
+    local extension_score_difference =
+        get_relative_sort_score_by_extensions(a, b)
+
+    if extension_score_difference ~= 0 then
+        return extension_score_difference < 0
     end
 
     return a.path < b.path
