@@ -1,13 +1,13 @@
 [alias]
-    b = branch
     c = commit
     d = diff
     dc = diff --cached
     l = "log --format='%C(auto) %h %d %s'"
-    ld = "log --format='%C(auto)%C(black)%C(bold) %cr%x09%an%x09%C(auto)%h %d %s'"
     shh = show HEAD
     st = status
     sw = switch
+
+    lease = push --force-with-lease
 
     set-blame-file = "!git config blame.ignoreRevsFile .git-blame-ignore-revs"
     set-private-user = "!git config user.name 'Patrick Feiring' && git config user.email 'pfeiring@live.com'"
