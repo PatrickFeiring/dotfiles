@@ -100,7 +100,7 @@ function M.parse_path(path)
         basename = path
     end
 
-    local stem = basename
+    local stem
     local extensions
 
     local i = basename:find("%.")
