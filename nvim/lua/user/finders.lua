@@ -23,6 +23,9 @@ vim.cmd([[
         \                               'options': '--tiebreak=index'}, <bang>0)
 ]])
 
+vim.keymap.set("n", "<C-W><C-C>", ":Files src/lib/components<CR>")
+vim.keymap.set("n", "<C-W><C-R>", ":Files src/routes<CR>")
+
 vim.g.fzf_layout = {
     down = "~40%",
 }
