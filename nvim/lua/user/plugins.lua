@@ -57,11 +57,10 @@ return {
     -- Window management
     {
         "christoomey/vim-tmux-navigator",
-        lazy = false,
     },
     {
         "szw/vim-maximizer",
-        config = function()
+        init = function()
             vim.g.maximizer_set_default_mapping = false
 
             local opts = { noremap = true, silent = true }
@@ -97,68 +96,74 @@ return {
     "airblade/vim-rooter",
     {
         "nvim-tree/nvim-web-devicons",
-        config = function()
-            require("nvim-web-devicons").setup({
-                -- SvelteKit icons inspired by
-                -- https://twitter.com/JohnPhamous/status/1661054406253748226/photo/1
-                override_by_filename = {
-                    ["+server.ts"] = {
-                        icon = "\u{eae9}",
-                    },
-                    ["+layout.server.ts"] = {
-                        icon = "\u{ebeb}",
-                    },
-                    ["+layout.ts"] = {
-                        icon = "\u{ebeb}",
-                    },
-                    ["+layout.svelte"] = {
-                        icon = "\u{ebeb}",
-                    },
-                    ["+page.server.ts"] = {
-                        icon = "\u{ea7b}",
-                    },
-                    ["+page.ts"] = {
-                        icon = "\u{ea7b}",
-                    },
-                    ["+error.svelte"] = {
-                        icon = "\u{ea7b}",
-                    },
-                    ["+page.svelte"] = {
-                        icon = "\u{ea7b}",
-                    },
+        opts = {
+            -- SvelteKit icons inspired by
+            -- https://twitter.com/JohnPhamous/status/1661054406253748226/photo/1
+            override_by_filename = {
+                ["+server.ts"] = {
+                    icon = "\u{eae9}",
                 },
-            })
-        end,
+                ["+layout.server.ts"] = {
+                    icon = "\u{ebeb}",
+                },
+                ["+layout.ts"] = {
+                    icon = "\u{ebeb}",
+                },
+                ["+layout.svelte"] = {
+                    icon = "\u{ebeb}",
+                },
+                ["+page.server.ts"] = {
+                    icon = "\u{ea7b}",
+                },
+                ["+page.ts"] = {
+                    icon = "\u{ea7b}",
+                },
+                ["+error.svelte"] = {
+                    icon = "\u{ea7b}",
+                },
+                ["+page.svelte"] = {
+                    icon = "\u{ea7b}",
+                },
+            },
+        },
     },
     {
         "nvim-neo-tree/neo-tree.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",
         },
-        config = function()
-            require("neo-tree").setup({
-                enable_git_status = false,
-                enable_diagnostics = false,
-                sort_function = utils.sort_project_paths,
-                window = {
-                    mappings = {
-                        ["o"] = "open",
-                    },
+        lazy = false,
+        opts = {
+            enable_git_status = false,
+            enable_diagnostics = false,
+            sort_function = utils.sort_project_paths,
+            window = {
+                mappings = {
+                    ["o"] = "open",
                 },
-                filesystem = {
-                    filtered_items = {
-                        visible = false,
-                        hide_dotfiles = false,
-                        hide_gitignored = true,
-                        hide_by_name = { ".git" },
-                        show_hidden_count = false,
-                    },
+            },
+            filesystem = {
+                filtered_items = {
+                    visible = false,
+                    hide_dotfiles = false,
+                    hide_gitignored = true,
+                    hide_by_name = { ".git" },
+                    show_hidden_count = false,
                 },
-            })
-
-            vim.api.nvim_set_keymap("n", "<leader>n", ":Neotree reveal<CR>", {})
-            vim.api.nvim_set_keymap("n", "<leader>N", ":Neotree toggle<CR>", {})
-        end,
+            },
+        },
+        keys = {
+            {
+                "<leader>n",
+                "<cmd>Neotree reveal<CR>",
+                desc = "Open tree at file",
+            },
+            {
+                "<leader>N",
+                "<cmd>Neotree toggle<CR>",
+                desc = "Toggle file explorer",
+            },
+        },
     },
     {
         "tpope/vim-projectionist",
@@ -298,9 +303,10 @@ return {
     "christoomey/vim-sort-motion",
     {
         "junegunn/vim-easy-align",
-        config = function()
-            vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
-        end,
+        lazy = false,
+        keys = {
+            { "ga", "<Plug>(EasyAlign)", desc = "Align operator" },
+        },
     },
 
     "tpope/vim-eunuch",
