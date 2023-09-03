@@ -2,6 +2,7 @@ alias g=git
 alias gr='cd $(git rev-parse --show-toplevel)'
 alias ll='ls -FGlAhp'
 alias k='kubectl'
+alias pn=pnpm
 alias t=tmux
 alias tx=tmuxinator
 
