@@ -311,6 +311,7 @@ local javascript_snippets = {
     s("desc", line_between(between("describe('", "', () => {"), t("})"))),
     s("load", line_between(between("export const load = (", ") => {"), t("}"))),
     s("test", line_between(between("test('", "', () => {"), t("})"))),
+    s("aaf", between("async (", ") => {", "}")),
     s(
         "edf",
         t("export default function "),
@@ -325,7 +326,7 @@ local javascript_snippets = {
     }, {
         condition = conditions.line_begin,
     }),
-    s("aa", between("async (", ") => {", "}")),
+    s("af", between("(", ") => {", "}")),
     s("cl", function_call("console.log")),
     s("dp", {
         t("defineProps<> "),
@@ -377,9 +378,9 @@ local javascript_snippets = {
         { condition = conditions.line_begin }
     ),
     s("il", {
-        t("import "),
+        t("import { "),
         i(1),
-        t(" from '$lib/"),
+        t(" } from '$lib/"),
         i(2),
         t("';"),
     }, { condition = conditions.line_begin }),
@@ -396,10 +397,12 @@ local javascript_snippets = {
     s("oe", function_call_no_semicolon("Object.entries")),
     s("ok", function_call_no_semicolon("Object.keys")),
     s("ov", function_call_no_semicolon("Object.values")),
+    s("ra", t("return [];")),
     s("rf", t("return false;")),
     s("rn", t("return null;")),
     s("rt", t("return true;")),
-    s("a", between("(", ") => {", "}")),
+    s("a", t("await ")),
+    s("c", t("const ")),
     s("e", t("export ")),
     s(
         "i",
@@ -416,7 +419,7 @@ luasnip.add_snippets("typescript", javascript_snippets)
 luasnip.add_snippets("typescriptreact", javascript_snippets)
 
 luasnip.add_snippets("lua", {
-    s("req", { t("require('"), i(1), t("')") }),
+    s("req", between("require('", "')")),
     s("lf", {
         t("local function "),
         i(1),
@@ -431,7 +434,7 @@ luasnip.add_snippets("lua", {
     s("rt", t("return true")),
     s("f", t("false")),
     s("l", t("local ")),
-    s("p", { t("print("), i(1), t(")") }),
+    s("p", function_call_no_semicolon("print")),
     s("r", t("return")),
     s("t", t("true")),
 })
