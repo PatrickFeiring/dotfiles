@@ -645,6 +645,9 @@ luasnip.add_snippets("sql", {
 
 luasnip.add_snippets("svelte", {
     s("elseif", between("{:else if ", "}")),
+    s("debug", between("{@debug ", "}")),
+    s("const", between("{@const ", " = ", "}")),
+    s("html", between("{@html ", "}")),
     s(
         "eachs",
         line_between(
