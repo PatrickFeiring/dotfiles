@@ -317,6 +317,7 @@ local javascript_snippets = {
         t("export default function "),
         { condition = conditions.line_begin }
     ),
+    s("doc", { t({ "/**", " * " }), i(1), t({ "", " */" }) }),
     s("eld", t("export let data;"), { condition = conditions.line_begin }),
     s("isk", {
         t("import { "),
@@ -341,6 +342,7 @@ local javascript_snippets = {
     s("ed", t("export default "), { condition = conditions.line_begin }),
     s("el", t("export let "), { condition = conditions.line_begin }),
     s("et", t("export type "), { condition = conditions.line_begin }),
+    s("ei", t("export interface "), { condition = conditions.line_begin }),
     s("ia", {
         t("import "),
         i(1),
@@ -400,17 +402,19 @@ local javascript_snippets = {
     s("ra", t("return [];")),
     s("rf", t("return false;")),
     s("rn", t("return null;")),
+    s("ro", between("return { ", " };")),
     s("rt", t("return true;")),
     s("a", t("await ")),
     s("c", t("const ")),
     s("e", t("export ")),
+    s("f", t("false")),
     s(
         "i",
         { t("import { "), i(1), t(" } from '"), i(2), t("';") },
         { condition = conditions.line_begin }
     ),
     s("r", between("return", ";")),
-    s("t", between("`", "`")),
+    s("t", t("true")),
 }
 
 luasnip.add_snippets("javascript", javascript_snippets)
