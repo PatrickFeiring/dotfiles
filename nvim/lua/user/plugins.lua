@@ -280,7 +280,12 @@ return {
         end,
     },
 
-    "JoosepAlviste/nvim-ts-context-commentstring",
+    {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        config = function()
+            require("ts_context_commentstring").setup({})
+        end,
+    },
     "tpope/vim-commentary",
     {
         "glts/vim-textobj-comment",
