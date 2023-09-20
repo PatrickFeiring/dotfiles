@@ -23,8 +23,19 @@ vim.cmd([[
         \                               'options': '--tiebreak=index'}, <bang>0)
 ]])
 
-vim.keymap.set("n", "<C-W><C-C>", ":Files src/lib/components<CR>")
-vim.keymap.set("n", "<C-W><C-R>", ":Files src/routes<CR>")
+vim.cmd([[
+    function! s:list_cmd()
+        let base = fnamemodify(expand('%'), ':h:.:S')
+        return base == '.' ? 'fd ''\+page.svelte'' ''src/routes'' --type f --hidden' : printf('fd ''\+page.svelte'' ''src/routes'' --type f --hidden | proximity-sort %s', shellescape(expand('%')))
+    endfunction
+
+    command! -bang -nargs=? -complete=dir Routes
+        \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
+        \                               'options': '--tiebreak=index'}, <bang>0)
+]])
+
+vim.keymap.set("n", "<C-W><C-L>", ":Files src/lib<CR>")
+vim.keymap.set("n", "<C-W><C-R>", ":Routes<CR>")
 
 vim.g.fzf_layout = {
     down = "~40%",
