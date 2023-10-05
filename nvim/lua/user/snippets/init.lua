@@ -516,6 +516,23 @@ luasnip.add_snippets("rust", {
         i(2),
         t({ "", "}" }),
     }),
+    s(
+        "tests",
+        line_between(
+            t({ "#[cfg(test)]", "mod tests {", "    use super::*;", "" }),
+            t("}")
+        )
+    ),
+    s(
+        "test",
+        line_between(
+            t({
+                "#[test]",
+                "fn () {",
+            }),
+            t("}")
+        )
+    ),
     s("ddd", t("#[derive(Debug, Deserialize)]")),
     s("dds", t("#[derive(Debug, Serialize)]")),
     s("for", {
@@ -528,20 +545,31 @@ luasnip.add_snippets("rust", {
         t({ "", "}" }),
     }),
     s("pan", function_call("panic!")),
+    s("db", between("dbg!(", ")")),
     s("dd", t("#[derive(Debug)]")),
     s("ec", t("extern crate ")),
+    s("fo", function_call("format!")),
     s("ld", function_call("debug!")),
     s("le", function_call("error!")),
     s("li", function_call("info!")),
     s("lm", t("let mut ")),
     s("lw", function_call("warn!")),
-    s("mu", t("#[macro_user]")),
     s("pd", between('println!("{:?}", ', ");")),
+    s("pf", t("pub fn ")),
+    s(
+        "ps",
+        { t("pub struct "), i(1), t({ " {", "    " }), i(2), t({ "", "}" }) },
+        { condition = conditions.line_begin }
+    ),
     s("pp", between('println!("{:#?}", ', ");")),
+    s("rf", t("return false;")),
+    s("rn", t("return None;")),
+    s("rt", t("return true;")),
     s(".e", function_call(".expect")),
     s(".u", t(".unwrap()")),
-    s("d", between("#[derive(", ")]")),
-    s("f", function_call("format!")),
+    s("c", t("continue;"), { condition = conditions.line_begin }),
+    s("d", between("#[derive(", ")]"), { condition = conditions.line_begin }),
+    s("l", t("let ")),
     s("m", { t("match "), i(1), t({ " {", "" }), i(2), t({ "", "}" }) }),
     s(
         "s",
@@ -549,8 +577,8 @@ luasnip.add_snippets("rust", {
         { condition = conditions.line_begin }
     ),
     s("p", function_call("println!")),
-    s("r", between("return ", ";")),
-    s("u", function_call("use ")),
+    s("r", between("return", ";")),
+    s("u", between("use ", ";"), { condition = conditions.line_begin }),
 })
 
 luasnip.add_snippets("sql", {
