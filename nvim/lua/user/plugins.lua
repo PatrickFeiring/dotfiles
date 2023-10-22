@@ -386,6 +386,7 @@ return {
             _G.format_filetypes_on_write = {
                 cabal = true,
                 cpp = true,
+                css = true,
                 dhall = true,
                 graphql = true,
                 haskell = true,
@@ -393,15 +394,19 @@ return {
                 java = true,
                 javascript = true,
                 json = true,
+                jsonc = true,
                 lua = true,
                 nix = true,
+                prisma = true,
                 python = true,
                 rust = true,
+                scss = true,
                 svelte = true,
                 toml = true,
                 typescript = true,
                 typescriptreact = true,
                 vue = true,
+                yaml = true,
             }
 
             vim.api.nvim_create_user_command("FormatToggle", function()
