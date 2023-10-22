@@ -163,14 +163,7 @@ lspconfig.dhall_lsp_server.setup({
 local json_schemas = {}
 
 if schemastore then
-    json_schemas = schemastore.json.schemas({
-        select = {
-            "openapi.json",
-            "package.json",
-            "prettierrc.json",
-            "tsconfig.json",
-        },
-    })
+    json_schemas = schemastore.json.schemas()
 end
 
 lspconfig.jsonls.setup({
