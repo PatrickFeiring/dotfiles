@@ -704,6 +704,7 @@ luasnip.add_snippets("svelte", {
         line_between(t('<script lang="ts" context="module">'), t("</script>")),
         { condition = conditions.line_begin }
     ),
+    s("sw", between("<svelte:window ", " />")),
     s(
         "s",
         line_between(t('<script lang="ts">'), t("</script>")),
