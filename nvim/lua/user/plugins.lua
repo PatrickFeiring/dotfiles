@@ -198,6 +198,17 @@ return {
         end,
     },
     {
+        "antosha417/nvim-lsp-file-operations",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-neo-tree/neo-tree.nvim",
+            "stevearc/oil.nvim",
+        },
+        config = function()
+            require("lsp-file-operations").setup({})
+        end,
+    },
+    {
         "tpope/vim-projectionist",
         config = function()
             vim.api.nvim_set_keymap("n", "<leader>a", ":A<CR>", {})
