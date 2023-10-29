@@ -300,6 +300,16 @@ luasnip.add_snippets("java", {
     s("t", t("throws ")),
 })
 
+luasnip.add_snippets("oil", {
+    s("lsv", t("+layout.server.ts")),
+    s("psv", t("+page.server.ts")),
+    s("es", t("+error.svelte")),
+    s("ls", t("+layout.svelte")),
+    s("lt", t("+layout.ts")),
+    s("ps", t("+page.svelte")),
+    s("pt", t("+page.ts")),
+})
+
 local javascript_snippets = {
     s("computed", between("computed(() => ", ");")),
     s(

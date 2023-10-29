@@ -166,6 +166,38 @@ return {
         },
     },
     {
+        "stevearc/oil.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("oil").setup({
+                keymaps = {
+                    ["g?"] = "actions.show_help",
+                    ["<CR>"] = "actions.select",
+                    ["<C-t>"] = "actions.select_tab",
+                    ["<C-s>"] = "actions.select_split",
+                    ["<C-v>"] = "actions.select_vsplit",
+                    ["<C-c>"] = "actions.close",
+                    ["<C-r>"] = "actions.refresh",
+                    ["-"] = "actions.parent",
+                    ["_"] = "actions.open_cwd",
+                    ["`"] = "actions.cd",
+                    ["~"] = "actions.tcd",
+                    ["gs"] = "actions.change_sort",
+                    ["gx"] = "actions.open_external",
+                    ["g."] = "actions.toggle_hidden",
+                },
+                use_default_keymaps = false,
+            })
+
+            vim.keymap.set(
+                "n",
+                "-",
+                "<CMD>Oil<CR>",
+                { desc = "Open parent directory" }
+            )
+        end,
+    },
+    {
         "tpope/vim-projectionist",
         config = function()
             vim.api.nvim_set_keymap("n", "<leader>a", ":A<CR>", {})
