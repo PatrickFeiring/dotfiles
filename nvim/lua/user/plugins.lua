@@ -29,8 +29,16 @@ return {
         "j-hui/fidget.nvim",
         tag = "legacy", -- Pin until rewrite is finished
         event = "LspAttach",
+        opts = {},
     },
     "b0o/schemastore.nvim",
+    {
+        "smjonas/inc-rename.nvim",
+        event = "LspAttach",
+        config = function()
+            require("inc_rename").setup()
+        end,
+    },
 
     -- Treesitter
     {

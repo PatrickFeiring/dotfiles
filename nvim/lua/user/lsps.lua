@@ -6,12 +6,6 @@ end
 
 -- Visualize lsp loading progress. Not all language servers do support the
 -- progress update endpoints.
-local fidget = prequire("fidget")
-
-if fidget then
-    fidget.setup({})
-end
-
 vim.o.signcolumn = "yes"
 
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
@@ -78,7 +72,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end, opts)
 
         vim.keymap.set("n", "<space>h", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<space>r", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<space>r", function()
+            return ":IncRename " .. vim.fn.expand("<cword>")
+        end, { expr = true })
         vim.keymap.set("n", "<space>f", function()
             vim.lsp.buf.format({ async = true })
         end, opts)
