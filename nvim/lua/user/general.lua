@@ -43,3 +43,5 @@ vim.o.foldlevelstart = 20
 vim.o.lazyredraw = true
 vim.keymap.set("n", "Q", "@q")
 vim.keymap.set("v", "Q", ":'<,'>normal! @q <CR>")
+
+vim.o.spelllang = "en_us"

@@ -7,3 +7,5 @@ vim.wo.wrap = true
 vim.wo.breakindent = true
 
 vim.b.codefmt_formatter = "prettier"
+
+vim.bo.spelllang = "en_us,no_nb"
