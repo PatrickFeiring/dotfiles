@@ -39,6 +39,7 @@
     ~/.zshenv: shells/zsh/zshenv
     ~/.zsh_plugins: shells/zsh/zsh_plugins
     ~/.utils.sh: shells/utils.sh
+    ~/.local/bin/launch_editor.sh: shells/launch_editor.sh
     ~/.config/fd/ignore: fd/ignore
 
     ~/.config/alacritty/alacritty.yml: terminals/alacritty.yml
