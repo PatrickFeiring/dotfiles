@@ -2,23 +2,23 @@
     link:
       relink: true
 
-- clean: 
-  - '~'
-  - '~/.config'
+- clean:
+    - "~"
+    - "~/.config"
 
 - create:
-  - ~/.config
-  - ~/.config/alacritty
-  - ~/.config/fd
-  - ~/.config/git
-  - ~/.config/kitty
-  - ~/.config/nix
-  - ~/.config/nvim
-  - ~/.config/pet
-  - ~/.config/tmux
-  - ~/.config/yapf
-  - ~/.local
-  - ~/.local/bin
+    - ~/.config
+    - ~/.config/alacritty
+    - ~/.config/fd
+    - ~/.config/git
+    - ~/.config/kitty
+    - ~/.config/nix
+    - ~/.config/nvim
+    - ~/.config/pet
+    - ~/.config/tmux
+    - ~/.config/yapf
+    - ~/.local
+    - ~/.local/bin
 
 - link:
     ~/.config/nvim/init.lua: nvim/init.lua
@@ -58,8 +58,8 @@
     ~/.config/nix/nix.conf: nix/nix.conf
 
     ~/.config/karabiner.edn:
-      if: '[ `uname` = Darwin ]'
+      if: "[ `uname` = Darwin ]"
       path: mac/karabiner.edn
-  
+
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+    - [git submodule update --init --recursive, Installing submodules]
