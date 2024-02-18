@@ -196,6 +196,12 @@ return {
                     ["g."] = "actions.toggle_hidden",
                 },
                 use_default_keymaps = false,
+                view_options = {
+                    show_hidden = true,
+                    is_always_hidden = function(name)
+                        return name == ".git" or name == ".DS_Store"
+                    end,
+                },
             })
 
             vim.keymap.set(
