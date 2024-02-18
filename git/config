@@ -19,6 +19,9 @@
     markIgnoredLines = true
     markUnblamableLines = true
 
+[branch]
+    sort = -committerdate
+
 [core]
     excludesfile = ~/.config/git/gitignore_global
 
