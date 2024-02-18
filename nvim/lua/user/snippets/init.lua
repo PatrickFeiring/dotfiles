@@ -166,13 +166,25 @@ luasnip.add_snippets("cpp", cpp_snippets)
 luasnip.add_snippets("lex", cpp_snippets)
 
 local css_snippets = {
+    s("posa", t("position: absolute;")),
+    s("posr", t("position: relative;")),
     s("dib", t("display: inline-block;")),
+    s("fsi", t("font-style: italic;")),
+    s("pic", t("place-items: center;")),
+    s("tal", t("text-align: left;")),
+    s("ai", between("align-items: ", ";")),
+    s("br", between("border-radius: ", ";")),
+    s("bg", between("background: ", ";")),
+    s("cp", t("cursor: pointer;")),
     s("db", t("display: block;")),
     s("df", t("display: flex;")),
     s("dg", t("display: grid;")),
+    s("dn", t("display: none;")),
     s("ff", between("font-family: ", ";")),
     s("fs", between("font-size: ", ";")),
     s("fw", between("font-weight: ", ";")),
+    s("ga", between("grid-area: ", ";")),
+    s("jc", between("justify-content: ", ";")),
     s("lh", between("line-height: ", ";")),
     s("ma", t("margin: auto;")),
     s("mb", between("margin-bottom: ", ";")),
@@ -183,6 +195,8 @@ local css_snippets = {
     s("pl", between("padding-left: ", ";")),
     s("pr", between("padding-right: ", ";")),
     s("pt", between("padding-top: ", ";")),
+    s("ta", between("text-align: ", ";")),
+    s("b", between("border: 1px solid ", ";")),
     s("m", between("margin: ", ";")),
     s("p", between("padding: ", ";")),
     s("v", between("var(--", ");")),
@@ -332,8 +346,14 @@ local javascript_snippets = {
     s("isk", {
         t("import { "),
         i(1),
-        t(" } from '@sveltejs/kit"),
-        t("';"),
+        t(" } from '@sveltejs/kit;'"),
+    }, {
+        condition = conditions.line_begin,
+    }),
+    s("isv", {
+        t("import { "),
+        i(1),
+        t(" } from 'svelte';"),
     }, {
         condition = conditions.line_begin,
     }),
@@ -386,7 +406,7 @@ local javascript_snippets = {
     }),
     s(
         "id",
-        between("import ", " from ", ";"),
+        between("import ", " from '", "';"),
         { condition = conditions.line_begin }
     ),
     s("il", {
@@ -454,6 +474,16 @@ luasnip.add_snippets("lua", {
 })
 
 luasnip.add_snippets("markdown", {
+    s("python", line_between(t("```python"), t("```"))),
+    s("svelte", line_between(t("```svelte"), t("```"))),
+    s("bash", line_between(t("```bash"), t("```"))),
+    s("html", line_between(t("```html"), t("```"))),
+    s("json", line_between(t("```json"), t("```"))),
+    s("rust", line_between(t("```rust"), t("```"))),
+    s("yaml", line_between(t("```yaml"), t("```"))),
+    s("css", line_between(t("```css"), t("```"))),
+    s("sql", line_between(t("```sql"), t("```"))),
+    s("ts", line_between(t("```typescript"), t("```"))),
     s("a", { t("["), i(1, "description"), t("]("), i(2, "link"), t(")") }),
 })
 
@@ -555,6 +585,8 @@ luasnip.add_snippets("rust", {
         t({ "", "}" }),
     }),
     s("pan", function_call("panic!")),
+    s("ppd", between('println!("{:#?}", ', ");")),
+    s("af", t("async fn")),
     s("db", between("dbg!(", ")")),
     s("dd", t("#[derive(Debug)]")),
     s("ec", t("extern crate ")),
@@ -571,10 +603,12 @@ luasnip.add_snippets("rust", {
         { t("pub struct "), i(1), t({ " {", "    " }), i(2), t({ "", "}" }) },
         { condition = conditions.line_begin }
     ),
+    s("pm", t("pub mod ")),
     s("pp", between('println!("{:#?}", ', ");")),
     s("rf", t("return false;")),
     s("rn", t("return None;")),
     s("rt", t("return true;")),
+    s("vn", t("Vec::new()")),
     s(".e", function_call(".expect")),
     s(".u", t(".unwrap()")),
     s("c", t("continue;"), { condition = conditions.line_begin }),
