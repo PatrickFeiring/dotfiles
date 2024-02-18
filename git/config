@@ -5,7 +5,6 @@
     l = "log --format='%C(auto) %h %d %s'"
     shh = show HEAD
     st = status
-    sw = switch
 
     lease = push --force-with-lease
 
