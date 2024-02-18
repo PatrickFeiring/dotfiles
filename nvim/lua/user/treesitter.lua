@@ -81,6 +81,9 @@ require("nvim-treesitter.configs").setup({
             },
         },
     },
+    matchup = {
+        enable = true,
+    },
 })
 
 local installed = pcall(vim.treesitter.language.require_language, "sql")
