@@ -573,6 +573,13 @@ return {
         end,
     },
     {
+        "ruifm/gitlinker.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        opts = {},
+    },
+    {
         "sindrets/diffview.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
