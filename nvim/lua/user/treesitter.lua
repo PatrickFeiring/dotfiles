@@ -4,15 +4,6 @@ if not parsers then
     return
 end
 
-local parser_configs = parsers.get_parser_configs()
-
-parser_configs.sql = {
-    install_info = {
-        url = "~/Documents/tree-sitter-sql",
-        files = { "src/parser.c" },
-    },
-}
-
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "bash",
@@ -85,24 +76,3 @@ require("nvim-treesitter.configs").setup({
         enable = true,
     },
 })
-
-local installed = pcall(vim.treesitter.language.require_language, "sql")
-
-if installed then
-    -- Currently it is hard to override the built in queries except using the
-    -- set_query function with a string
-    -- https://github.com/nvim-treesitter/nvim-treesitter/issues/3146
-    local f = io.open(
-        os.getenv("HOME") .. "/Documents/tree-sitter-sql/queries/highlights.scm",
-        "r"
-    )
-    local highlight_queries = ""
-
-    if f then
-        highlight_queries = f:read("*all")
-        f:close()
-    end
-
-    require("vim.treesitter.query").set("sql", "highlights", highlight_queries)
-    require("vim.treesitter.query").set("sql", "injections", "")
-end
