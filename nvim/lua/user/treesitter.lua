@@ -37,6 +37,22 @@ require("nvim-treesitter.configs").setup({
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
+        disable = function(lang, bufnr)
+            if vim.api.nvim_buf_line_count(bufnr) > 20000 then
+                return true
+            end
+
+            local byte_size = vim.api.nvim_buf_get_offset(
+                bufnr,
+                vim.api.nvim_buf_line_count(bufnr)
+            )
+
+            if byte_size > 5 * 1024 * 1024 then
+                return true
+            end
+
+            return false
+        end,
     },
 
     textobjects = {
