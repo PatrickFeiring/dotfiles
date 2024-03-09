@@ -137,6 +137,13 @@ lspconfig.pyright.setup({
 
 lspconfig.rust_analyzer.setup({
     capabilities = capabilities,
+    settings = {
+        ["rust-analyzer"] = {
+            files = {
+                excludeDirs = {"node_modules"}
+            },
+        },
+    },
 })
 
 lspconfig.svelte.setup({
