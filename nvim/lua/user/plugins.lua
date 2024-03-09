@@ -239,49 +239,6 @@ return {
                         alternate = "{}.hpp",
                         type = "source",
                     },
-                    -- Django
-                    ["urls.py"] = {
-                        alternate = "views.py",
-                        type = "urls",
-                    },
-                    ["views.py"] = {
-                        alternate = "urls.py",
-                        type = "views",
-                    },
-                    ["serializers.py"] = {
-                        alternate = "models.py",
-                        type = "serializers",
-                    },
-                    ["models.py"] = {
-                        alternate = "serializers.py",
-                        type = "models",
-                    },
-                    ["tests.py"] = {
-                        type = "tests",
-                    },
-                    -- Lua
-                    ["*_spec.lua"] = {
-                        alternate = "{}.lua",
-                        type = "source",
-                    },
-                    ["*.lua"] = {
-                        alternate = "{}_spec.lua",
-                        type = "tests",
-                    },
-                    -- Svelte
-                    ["+page.ts"] = {
-                        alternate = "+page.svelte",
-                        type = "view",
-                    },
-                    ["+page.svelte"] = {
-                        alternate = "+page.ts",
-                        type = "data",
-                    },
-                    -- Vue
-                    ["*.vue"] = {
-                        alternate = "index.vue",
-                        type = "index",
-                    },
                 },
             }
         end,
