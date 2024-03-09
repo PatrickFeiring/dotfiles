@@ -5,5 +5,5 @@ windows:
       layout: main-vertical
       panes:
         - <%= ENV["EDITOR"] %>
-        - npm run dev
+        - test -f pnpm-lock.yaml && pnpm run dev || npm run dev
         - git status
