@@ -473,7 +473,7 @@ luasnip.add_snippets("lua", {
     s("t", t("true")),
 })
 
-luasnip.add_snippets("markdown", {
+local markdown_snippets = {
     s("python", line_between(t("```python"), t("```"))),
     s("svelte", line_between(t("```svelte"), t("```"))),
     s("bash", line_between(t("```bash"), t("```"))),
@@ -485,7 +485,10 @@ luasnip.add_snippets("markdown", {
     s("sql", line_between(t("```sql"), t("```"))),
     s("ts", line_between(t("```typescript"), t("```"))),
     s("a", { t("["), i(1, "description"), t("]("), i(2, "link"), t(")") }),
-})
+}
+
+luasnip.add_snippets("markdown", markdown_snippets)
+luasnip.add_snippets("markdown_inline", markdown_snippets)
 
 luasnip.add_snippets("php", {
     s("dvd", between("die(var_dump(", "));")),
