@@ -27,8 +27,6 @@ return {
     "neovim/nvim-lspconfig",
     {
         "j-hui/fidget.nvim",
-        tag = "legacy", -- Pin until rewrite is finished
-        event = "LspAttach",
         opts = {},
     },
     "b0o/schemastore.nvim",
