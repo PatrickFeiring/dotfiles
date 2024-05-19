@@ -540,6 +540,9 @@ return {
                     signcolumn = "no",
                 },
             },
+            plugins = {
+                twilight = { enabled = false },
+            },
         },
     },
     {
