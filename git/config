@@ -14,6 +14,8 @@
     sync-main = "!git fetch origin main:main"
     sync-master = "!git fetch origin master:master"
 
+    tip = "!git fetch origin main && git rebase origin/main"
+
 [blame]
     markIgnoredLines = true
     markUnblamableLines = true
