@@ -21,9 +21,9 @@ vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.shiftround = true
 
-vim.o.termguicolors = true
-vim.o.t_8f = "<Esc>[38;2;%lu;%lu;%lum"
-vim.o.t_8b = "<Esc>[48;2;%lu;%lu;%lum"
+-- vim.o.termguicolors = true
+-- vim.o.t_8f = "<Esc>[38;2;%lu;%lu;%lum"
+-- vim.o.t_8b = "<Esc>[48;2;%lu;%lu;%lum"
 
 vim.o.number = true
 vim.o.relativenumber = true

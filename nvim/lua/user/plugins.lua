@@ -46,7 +46,6 @@ return {
         build = ":TSUpdate",
     },
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "nvim-treesitter/playground",
 
     {
         "mfussenegger/nvim-lint",
@@ -293,20 +292,6 @@ return {
         init = function()
             vim.g.pastedtext_select_key = "gp"
         end,
-    },
-
-    {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        config = function()
-            require("ts_context_commentstring").setup({})
-        end,
-    },
-    "tpope/vim-commentary",
-    {
-        "glts/vim-textobj-comment",
-        dependencies = {
-            "kana/vim-textobj-user",
-        },
     },
 
     {
