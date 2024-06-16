@@ -86,7 +86,7 @@ if [ -n "${commands[fzf-share]}" ]; then
 fi
 
 [ -n "${commands[direnv]}" ] && eval "$(direnv hook zsh)"
-[ -n "${commands[fnm]}" ] && eval "$(fnm env --use-on-cd)"
+[ -n "${commands[fnm]}" ] && eval "$(fnm env --use-on-cd --corepack-enabled --version-file-strategy=recursive)"
 
 [ -f ~/.ghcup/env ] && source ~/.ghcup/env
 [ -f ~/.utils.sh ] && source ~/.utils.sh
