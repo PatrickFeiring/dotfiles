@@ -1,0 +1,11 @@
+{
+  "name": "dotfiles",
+  "dependencies": {
+    "svelte-language-server": "^0.16.10",
+    "typescript": "^5.4.5",
+    "typescript-language-server": "^4.3.3",
+    "vercel": "^34.2.7",
+    "vscode-langservers-extracted": "^4.10.0",
+    "yaml-language-server": "^1.15.0"
+  }
+}

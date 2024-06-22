@@ -14,6 +14,7 @@ export DOCKER_BUILDKIT=1
 
 export PATH="$PATH:./ghcup/.bin"
 export PATH="$PATH:./node_modules/.bin"
+export PATH="$PATH:$HOME/Documents/dotfiles/node_modules/.bin"
 export PATH="$PATH:$HOME/.cabal/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.local/bin"
