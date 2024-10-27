@@ -315,13 +315,13 @@ luasnip.add_snippets("java", {
 })
 
 luasnip.add_snippets("oil", {
-    s("lsv", t("+layout.server.ts")),
-    s("psv", t("+page.server.ts")),
+    s("lsts", t("+layout.server.ts")),
+    s("psts", t("+page.server.ts")),
     s("es", t("+error.svelte")),
+    s("lts", t("+layout.ts")),
+    s("pts", t("+page.ts")),
     s("ls", t("+layout.svelte")),
-    s("lt", t("+layout.ts")),
     s("ps", t("+page.svelte")),
-    s("pt", t("+page.ts")),
 })
 
 local javascript_snippets = {
@@ -334,6 +334,9 @@ local javascript_snippets = {
     s("comp", between("computed(() => ", ");")),
     s("desc", line_between(between("describe('", "', () => {"), t("})"))),
     s("load", line_between(between("export const load = (", ") => {"), t("}"))),
+    s("insp", between("$inspect(", ")"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
     s("test", line_between(between("test('", "', () => {"), t("})"))),
     s("aaf", between("async (", ") => {", "}")),
     s(
@@ -356,6 +359,9 @@ local javascript_snippets = {
         t(" } from 'svelte';"),
     }, {
         condition = conditions.line_begin,
+    }),
+    s("ldb", between("let ", " = $derived.by(() => {", "});"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
     }),
     s("af", between("(", ") => {", "}")),
     s("cl", function_call("console.log")),
@@ -426,14 +432,24 @@ local javascript_snippets = {
         { t("import "), i(1), t(' from "@/views/"'), f(copy, 1), t(".vue;") },
         { condition = conditions.line_begin }
     ),
+    s("ld", between("let ", " = $derived();"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
+    s("lp", between("let { ", " } = $props();"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
+    s("ls", between("let ", " = $state(", ");"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
     s("oe", function_call_no_semicolon("Object.entries")),
     s("ok", function_call_no_semicolon("Object.keys")),
     s("ov", function_call_no_semicolon("Object.values")),
-    s("ra", t("return [];")),
+    s("re", t("return [];")),
     s("rf", t("return false;")),
     s("rn", t("return null;")),
     s("ro", between("return { ", " };")),
     s("rt", t("return true;")),
+    s("ru", t("return undefined;")),
     s("a", t("await ")),
     s("c", t("const ")),
     s("e", t("export ")),
@@ -484,6 +500,7 @@ local markdown_snippets = {
     s("css", line_between(t("```css"), t("```"))),
     s("sql", line_between(t("```sql"), t("```"))),
     s("ts", line_between(t("```typescript"), t("```"))),
+    s("py", line_between(t("```python"), t("```"))),
     s("a", { t("["), i(1, "description"), t("]("), i(2, "link"), t(")") }),
 }
 
@@ -576,6 +593,7 @@ luasnip.add_snippets("rust", {
             t("}")
         )
     ),
+    s(".ts", t(".to_string()")),
     s("ddd", t("#[derive(Debug, Deserialize)]")),
     s("dds", t("#[derive(Debug, Serialize)]")),
     s("for", {
@@ -600,6 +618,11 @@ luasnip.add_snippets("rust", {
     s("lm", t("let mut ")),
     s("lw", function_call("warn!")),
     s("pd", between('println!("{:?}", ', ");")),
+    s(
+        "pe",
+        { t("pub enum "), i(1), t({ " {", "    " }), i(2), t({ "", "}" }) },
+        { condition = conditions.line_begin }
+    ),
     s("pf", t("pub fn ")),
     s(
         "ps",
@@ -614,6 +637,7 @@ luasnip.add_snippets("rust", {
     s("vn", t("Vec::new()")),
     s(".e", function_call(".expect")),
     s(".u", t(".unwrap()")),
+    s("a", between("#[", "]")),
     s("c", t("continue;"), { condition = conditions.line_begin }),
     s("d", between("#[derive(", ")]"), { condition = conditions.line_begin }),
     s("l", t("let ")),
@@ -723,7 +747,10 @@ luasnip.add_snippets("sql", {
 })
 
 luasnip.add_snippets("svelte", {
+    s("renderc", t("@{render children()}")),
     s("elseif", between("{:else if ", "}")),
+    s("render", between("{@render ", "()}")),
+    s("await", line_between(between("{#await ", "}"), t("{/await}"))),
     s("debug", between("{@debug ", "}")),
     s("const", between("{@const ", " = ", "}")),
     s("html", between("{@html ", "}")),
