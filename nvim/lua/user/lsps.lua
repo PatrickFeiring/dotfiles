@@ -200,6 +200,9 @@ lspconfig.jsonls.setup({
     },
 })
 
+lspconfig.taplo.setup({
+    capabilities = capabilities,
+})
 
 lspconfig.yamlls.setup({
     capabilities = capabilities,
