@@ -490,13 +490,13 @@ return {
         "tpope/vim-dadbod",
         config = function()
             -- Run textobject but leave cursor in its place
-            _G.run_textobject = function(type)
+            _G.run_textobject_query = function(type)
                 local bufnr = 0
                 local cursor = vim.api.nvim_win_get_cursor(bufnr)
 
                 if type == nil then
                     _G.query_cursor_position = cursor
-                    vim.o.operatorfunc = "v:lua.run_textobject"
+                    vim.o.operatorfunc = "v:lua.run_textobject_query"
                     return "g@"
                 end
 
@@ -504,18 +504,23 @@ return {
                 vim.api.nvim_win_set_cursor(bufnr, _G.query_cursor_position)
             end
 
-            local run_current_line = function()
-                return _G.run_textobject() .. "_"
-            end
+            vim.keymap.set(
+                "n",
+                "<leader>q",
+                _G.run_textobject_query,
+                { noremap = true, expr = true }
+            )
 
-            local opts = { noremap = true, expr = true }
+            vim.keymap.set("n", "<leader>qq", function()
+                return _G.run_textobject_query() .. "_"
+            end, { noremap = true, expr = true })
 
-            vim.keymap.set("n", "<leader>q", _G.run_textobject, opts)
-            vim.keymap.set("n", "<leader>qq", run_current_line, opts)
+            vim.keymap.set("v", "<leader>q", function()
+                vim.cmd("exe \"'<,'>DB\"")
+            end, { noremap = true })
         end,
     },
     { dir = "~/Documents/db-scratch.vim" },
-    "edgedb/edgedb-vim",
 
     {
         "tpope/vim-fugitive",
