@@ -186,48 +186,30 @@ lspconfig.volar.setup({
 })
 
 -- Configure individual language servers for configuration languages
-local schemastore = prequire("schemastore")
-
 lspconfig.dhall_lsp_server.setup({
     capabilities = capabilities,
 })
-
-local json_schemas = {}
-
-if schemastore then
-    json_schemas = schemastore.json.schemas()
-end
 
 lspconfig.jsonls.setup({
     capabilities = capabilities,
     settings = {
         json = {
             validate = { enable = true },
-            schemas = json_schemas,
+            schemas = require("schemastore").json.schemas(),
         },
     },
 })
 
-local yaml_schemas = {}
-
-if schemastore then
-    yaml_schemas = schemastore.json.schemas({
-        select = {
-            "CircleCI config.yml",
-            "docker-compose.yml",
-            "GitHub Workflow",
-            "gitlab-ci",
-            "openapi.json",
-            "tmuxinator",
-        },
-    })
-end
 
 lspconfig.yamlls.setup({
     capabilities = capabilities,
     settings = {
         yaml = {
-            schemas = yaml_schemas,
+            schemaStore = {
+                enable = false,
+                url = "",
+            },
+            schemas = require("schemastore").yaml.schemas(),
         },
     },
 })
