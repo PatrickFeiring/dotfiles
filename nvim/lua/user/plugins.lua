@@ -346,117 +346,143 @@ return {
         end,
     },
 
-    -- Formatters
     {
-        "google/vim-codefmt",
-        dependencies = {
-            "google/vim-maktaba",
-            "google/vim-glaive",
-        },
+        "stevearc/conform.nvim",
         config = function()
-            local opts = { noremap = true, silent = true }
-
-            vim.api.nvim_set_keymap("n", "<leader>ff", ":FormatLines<CR>", opts)
-            vim.api.nvim_set_keymap(
-                "n",
-                "<leader>f",
-                ":set opfunc=codefmt#FormatMap<CR>g@",
-                opts
-            )
-            vim.api.nvim_set_keymap("v", "<leader>f", ":FormatLines<CR>", opts)
-        end,
-    },
-    {
-        "sbdchd/neoformat",
-        config = function()
-            vim.g.neoformat_enabled_haskell = { "ormolu" }
-            vim.g.neoformat_enabled_html = { "prettierd" }
-            vim.g.neoformat_enabled_javascript = { "prettierd" }
-            vim.g.neoformat_enabled_json = { "prettierd" }
-            vim.g.neoformat_enabled_svelte = { "prettierd" }
-            vim.g.neoformat_enabled_typescript = { "prettierd" }
-            vim.g.neoformat_enabled_typescript_react = { "prettierd" }
-            vim.g.neoformat_enabled_vue = { "prettierd" }
-
-            vim.g.neoformat_only_msg_on_error = 1
-
-            _G.format_on_write_enabled = true
-            _G.format_filetypes_on_write = {
-                cabal = true,
-                cpp = true,
-                css = true,
-                dhall = true,
-                graphql = true,
-                haskell = true,
-                html = true,
-                java = true,
-                javascript = true,
-                json = true,
-                jsonc = true,
-                lua = true,
-                nix = true,
-                prisma = true,
-                python = true,
-                rust = true,
-                scss = true,
-                svelte = true,
-                toml = true,
-                typescript = true,
-                typescriptreact = true,
-                vue = true,
-                yaml = true,
+            local formatters_by_ft = {
+                css = { "prettierd", "prettier", stop_after_first = true },
+                html = { "prettierd", "prettier", stop_after_first = true },
+                javascript = {
+                    "prettierd",
+                    "prettier",
+                    stop_after_first = true,
+                },
+                json = { "prettierd", "prettier", stop_after_first = true },
+                jsonc = { "prettierd", "prettier", stop_after_first = true },
+                lua = { "stylua" },
+                python = function(bufnr)
+                    if
+                        require("conform").get_formatter_info(
+                            "ruff_format",
+                            bufnr
+                        ).available
+                    then
+                        return { "ruff_format" }
+                    else
+                        return { "isort", "black" }
+                    end
+                end,
+                scss = { "prettierd", "prettier", stop_after_first = true },
+                sql = { "pg_format" },
+                svelte = { "prettierd", "prettier", stop_after_first = true },
+                typescript = {
+                    "prettierd",
+                    "prettier",
+                    stop_after_first = true,
+                },
+                typescript_react = {
+                    "prettierd",
+                    "prettier",
+                    stop_after_first = true,
+                },
+                vue = { "prettierd", "prettier", stop_after_first = true },
+                yaml = { "prettierd", "prettier", stop_after_first = true },
             }
 
-            vim.api.nvim_create_user_command("FormatToggle", function()
-                _G.format_on_write_enabled = not _G.format_on_write_enabled
-                P(
-                    string.format(
-                        "Format on write is %s",
-                        _G.format_on_write_enabled and "on" or "off"
-                    )
-                )
-            end, {})
+            local lsp_only = { "rust" }
 
-            vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-                group = vim.api.nvim_create_augroup("fmt", { clear = true }),
-                callback = function(opts)
+            require("conform").setup({
+                formatters_by_ft = formatters_by_ft,
+                format_on_save = function(bufnr)
                     if
-                        _G.format_on_write_enabled
-                        and _G.format_filetypes_on_write[vim.bo[opts.buf].filetype]
+                        vim.g.disable_autoformat
+                        or vim.b[bufnr].disable_autoformat
                     then
-                        if vim.bo.filetype == "cpp" then
-                            if utils.has_project_file(".clang-format") then
-                                vim.cmd("Neoformat! cpp clangformat")
-                            end
-                        elseif vim.bo.filetype == "python" then
-                            -- Since there is substantial variation accross
-                            -- projects in formatters and tooling, we do this
-                            -- dynamically
-                            -- TODO: consider caching it
-                            local tools = utils.get_tools_listed_in_pyproject()
-
-                            if tools["isort"] then
-                                vim.cmd("Neoformat! python isort")
-                            end
-                            if tools["black"] then
-                                vim.cmd("Neoformat! python black")
-                            end
-                        elseif vim.bo.filetype == "java" then
-                            if utils.has_project_file(".clang-format") then
-                                vim.cmd("Neoformat! java clangformat")
-                            end
-                        else
-                            vim.cmd("Neoformat")
-                        end
+                        return
                     end
+
+                    if
+                        not vim.tbl_contains(
+                            vim.tbl_keys(formatters_by_ft),
+                            vim.bo.filetype
+                        )
+                        and not vim.tbl_contains(lsp_only, vim.bo.filetype)
+                    then
+                        return
+                    end
+
+                    return {
+                        timeout_ms = 500,
+                        lsp_fallback = true,
+                    }
                 end,
             })
 
-            vim.api.nvim_create_user_command(
-                "ISort",
-                "Neoformat! python isort",
-                {}
-            )
+            _G.format_textobject = function(type)
+                if type == nil then
+                    vim.o.operatorfunc = "v:lua.format_textobject"
+                    return "g@"
+                end
+
+                if
+                    vim.g.disable_autoformat
+                    or vim.b[vim.api.nvim_get_current_buf()].disable_autoformat
+                then
+                    return
+                end
+
+                local from = vim.fn.getpos("'[")
+                local to = vim.fn.getpos("']")
+
+                require("conform").format({
+                    range = {
+                        start = { from[2], from[3] },
+                        ["end"] = { to[2], to[3] },
+                    },
+                })
+            end
+
+            vim.keymap.set("n", "<leader>f", _G.format_textobject, {
+                desc = "Format operator",
+                noremap = true,
+                expr = true,
+            })
+
+            vim.keymap.set("n", "<leader>ff", function()
+                return _G.format_textobject() .. "_"
+            end, {
+                desc = "Format current line",
+                noremap = true,
+                expr = true,
+            })
+
+            vim.api.nvim_create_user_command("FormatDisable", function()
+                vim.b.disable_autoformat = true
+                vim.g.disable_autoformat = true
+            end, {
+                desc = "Disable autoformat-on-save",
+            })
+
+            vim.api.nvim_create_user_command("FormatEnable", function()
+                vim.b.disable_autoformat = false
+                vim.g.disable_autoformat = false
+            end, {
+                desc = "Re-enable autoformat-on-save",
+            })
+
+            vim.api.nvim_create_user_command("FormatToggle", function()
+                vim.b.disable_autoformat = not vim.b.disable_autoformat
+                vim.g.disable_autoformat = vim.b.disable_autoformat
+
+                print(
+                    string.format(
+                        "Format on write is %s",
+                        vim.b.disable_autoformat and "off" or "on"
+                    )
+                )
+            end, {
+                desc = "Toggle autoformat-on-save",
+            })
         end,
     },
 
