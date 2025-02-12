@@ -1,0 +1,5 @@
+theme = tokyonight_moon
+
+mouse-hide-while-typing = true
+
+copy-on-select = clipboard
