@@ -141,7 +141,7 @@ lspconfig.rust_analyzer.setup({
     settings = {
         ["rust-analyzer"] = {
             files = {
-                excludeDirs = {"node_modules"}
+                excludeDirs = { "node_modules" }
             },
         },
     },
