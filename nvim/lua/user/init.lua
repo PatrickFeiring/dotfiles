@@ -4,10 +4,6 @@ vim.g.mapleader = ","
 vim.g.python3_host_prog = "~/.virtualenvs/neovim/bin/python"
 
 require("user.general")
-require("user.misc")
-require("user.runners")
-require("user.search")
-require("user.windows")
 
 -- Bootstrap lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -30,13 +26,6 @@ require("lazy").setup(require("user.plugins"), {
         colorscheme = { "nord" },
     },
 })
-
-vim.cmd([[
-    try
-        call glaive#Install()
-    catch
-        message "Failed to install glaive plugins"
-]])
 
 require("user.completion")
 require("user.debuggers")
