@@ -15,14 +15,6 @@ return {
     },
     "lukas-reineke/indent-blankline.nvim",
 
-    "google/vim-maktaba",
-    {
-        "google/vim-glaive",
-        dependencies = {
-            "google/vim-maktaba",
-        },
-    },
-
     -- Lsps
     "neovim/nvim-lspconfig",
     {
