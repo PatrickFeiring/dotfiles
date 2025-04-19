@@ -575,6 +575,4 @@ return {
             },
         },
     },
-
-    "vmchale/dhall-vim",
 }
