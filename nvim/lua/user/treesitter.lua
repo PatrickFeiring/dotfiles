@@ -5,34 +5,7 @@ if not parsers then
 end
 
 require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "bash",
-        "c",
-        "cpp",
-        "css",
-        "dockerfile",
-        "haskell",
-        "html",
-        "javascript",
-        "java",
-        "json",
-        "lua",
-        "make",
-        "markdown",
-        "nix",
-        "php",
-        "python",
-        "rust",
-        "scss",
-        "svelte",
-        "typescript",
-        "toml",
-        "tsx",
-        "vim",
-        "vimdoc",
-        "vue",
-        "yaml",
-    },
+    ensure_installed = "all",
 
     highlight = {
         enable = true,
