@@ -185,6 +185,11 @@ return {
                     ["g."] = "actions.toggle_hidden",
                 },
                 use_default_keymaps = false,
+                lsp_file_methods = {
+                    enabled = true,
+                    timeout_ms = 10000,
+                    autosave_changes = true
+                },
                 view_options = {
                     show_hidden = true,
                     is_always_hidden = function(name)
