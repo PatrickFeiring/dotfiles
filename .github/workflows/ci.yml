@@ -15,11 +15,9 @@ concurrency:
 
 jobs:
   stylua:
-    name: Check formatting
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: JohnnyMorganz/stylua-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -27,8 +25,7 @@ jobs:
           args: --check nvim/
 
   luacheck:
-    name: Lint
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: lunarmodules/luacheck@v1
@@ -36,8 +33,7 @@ jobs:
           args: nvim/
 
   test:
-    name: Test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
