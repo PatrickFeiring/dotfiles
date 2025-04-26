@@ -1,5 +1,9 @@
+vim.g.mapleader = ","
+
 vim.o.hidden = true
 vim.o.updatetime = 300
+
+vim.g.python3_host_prog = "~/.virtualenvs/neovim/bin/python"
 
 vim.opt.mouse = nil
 

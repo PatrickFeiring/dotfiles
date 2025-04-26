@@ -1,8 +1,7 @@
-require("user.globals")
-
 vim.g.mapleader = ","
 vim.g.python3_host_prog = "~/.virtualenvs/neovim/bin/python"
 
+require("user.globals")
 require("user.general")
 
 -- Bootstrap lazy
@@ -21,17 +20,18 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(require("user.plugins"), {
+require("lazy").setup("user.plugins", {
     install = {
         colorscheme = { "tokyonight" },
     },
 })
 
-require("user.completion")
-require("user.debuggers")
-require("user.finders")
-require("user.lsps")
-require("user.snippets")
-require("user.treesitter")
-
 prequire("user.local")
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        if vim.fn.argv(0) == "" then
+            vim.cmd("Files")
+        end
+    end,
+})
