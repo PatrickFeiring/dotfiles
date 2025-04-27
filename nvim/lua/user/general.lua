@@ -1,5 +1,7 @@
 vim.g.mapleader = ","
 
+vim.opt.clipboard = "unnamedplus"
+
 vim.o.hidden = true
 vim.o.updatetime = 300
 
