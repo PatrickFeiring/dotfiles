@@ -96,8 +96,8 @@ return {
                     ["gd"] = {
                         desc = "Toggle file detail view",
                         callback = function()
-                            detail = not detail
-                            if detail then
+                            _G.detail = not _G.detail
+                            if _G.detail then
                                 require("oil").set_columns({
                                     "icon",
                                     "permissions",

@@ -9,7 +9,7 @@ return {
                 highlight = {
                     enable = true,
                     additional_vim_regex_highlighting = false,
-                    disable = function(lang, bufnr)
+                    disable = function(_lang, bufnr)
                         if vim.api.nvim_buf_line_count(bufnr) > 20000 then
                             return true
                         end
