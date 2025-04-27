@@ -37,11 +37,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
+      - run: |
           sudo apt-get update
           sudo apt-get install -y luarocks
           sudo luarocks install busted
 
-      - name: Test
-        run: busted nvim/lua -lpath='./nvim/lua/?.lua'
+      - run: busted nvim/lua -lpath='./nvim/lua/?.lua'
