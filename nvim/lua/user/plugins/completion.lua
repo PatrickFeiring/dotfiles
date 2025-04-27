@@ -59,10 +59,22 @@ return {
                             },
                         },
                     }),
-                    ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-                    ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-                    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-                    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+                    ["<C-n>"] = cmp.mapping(
+                        cmp.mapping.select_next_item(),
+                        { "i", "c" }
+                    ),
+                    ["<C-p>"] = cmp.mapping(
+                        cmp.mapping.select_prev_item(),
+                        { "i", "c" }
+                    ),
+                    ["<C-b>"] = cmp.mapping(
+                        cmp.mapping.scroll_docs(-4),
+                        { "i", "c" }
+                    ),
+                    ["<C-f>"] = cmp.mapping(
+                        cmp.mapping.scroll_docs(4),
+                        { "i", "c" }
+                    ),
                     ["<C-e>"] = cmp.mapping({
                         i = cmp.mapping.abort(),
                         c = cmp.mapping.close(),
@@ -92,7 +104,7 @@ return {
 
                 _G._nvim_cmp_autocomplete_on = not _G._nvim_cmp_autocomplete_on
             end, { desc = "Toggle autocomplete" })
-        end
+        end,
     },
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
@@ -125,7 +137,7 @@ return {
             })
 
             vim.keymap.set("i", "<C-J>", "<Plug>luasnip-jump-next")
-        end
+        end,
     },
     {
         "mattn/emmet-vim",

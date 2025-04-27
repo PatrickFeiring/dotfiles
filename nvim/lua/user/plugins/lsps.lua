@@ -80,9 +80,19 @@ return {
                         vim.lsp.buf.format({ async = true })
                     end, opts)
 
-                    vim.keymap.set("i", "<C-S>", vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set(
+                        "i",
+                        "<C-S>",
+                        vim.lsp.buf.signature_help,
+                        opts
+                    )
 
-                    vim.keymap.set({ "n", "v" }, "<space>aa", vim.lsp.buf.code_action, opts)
+                    vim.keymap.set(
+                        { "n", "v" },
+                        "<space>aa",
+                        vim.lsp.buf.code_action,
+                        opts
+                    )
                     vim.keymap.set(
                         { "n", "v" },
                         "<space>ai",
@@ -92,7 +102,9 @@ return {
                     vim.keymap.set(
                         { "n", "v" },
                         "<space>au",
-                        apply_code_action_to_next_diagnostic("remove unused declaration"),
+                        apply_code_action_to_next_diagnostic(
+                            "remove unused declaration"
+                        ),
                         opts
                     )
                 end,
@@ -143,7 +155,7 @@ return {
                 settings = {
                     ["rust-analyzer"] = {
                         files = {
-                            excludeDirs = { "node_modules" }
+                            excludeDirs = { "node_modules" },
                         },
                     },
                 },
@@ -222,7 +234,7 @@ return {
                     },
                 },
             })
-        end
+        end,
     },
     {
         "j-hui/fidget.nvim",

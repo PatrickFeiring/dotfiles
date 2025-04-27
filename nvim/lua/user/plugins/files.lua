@@ -98,7 +98,12 @@ return {
                         callback = function()
                             detail = not detail
                             if detail then
-                                require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+                                require("oil").set_columns({
+                                    "icon",
+                                    "permissions",
+                                    "size",
+                                    "mtime",
+                                })
                             else
                                 require("oil").set_columns({ "icon" })
                             end
@@ -109,7 +114,7 @@ return {
                 lsp_file_methods = {
                     enabled = true,
                     timeout_ms = 10000,
-                    autosave_changes = true
+                    autosave_changes = true,
                 },
                 view_options = {
                     show_hidden = true,
@@ -134,7 +139,7 @@ return {
             "nvim-neo-tree/neo-tree.nvim",
             "stevearc/oil.nvim",
         },
-        opts = {}
+        opts = {},
     },
     {
         "tpope/vim-projectionist",

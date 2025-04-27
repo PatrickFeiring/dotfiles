@@ -15,11 +15,13 @@ vim.o.wildignore = vim.o.wildignore .. "*.o"
 
 vim.o.shortmess = vim.o.shortmess .. "I"
 
+-- stylua: ignore start
 vim.o.statusline = ""
 vim.o.statusline = vim.o.statusline .. "%f"       -- Path
 vim.o.statusline = vim.o.statusline .. "%h%m%r%w" -- Status
 vim.o.statusline = vim.o.statusline .. "%="       -- Shift right after here
 vim.o.statusline = vim.o.statusline .. "%y"       -- File type
+-- stylua: ignore end
 
 vim.o.autoindent = true
 vim.o.smartindent = true
