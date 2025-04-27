@@ -157,6 +157,24 @@ return {
                         alternate = "{}.hpp",
                         type = "source",
                     },
+                    -- Java test files
+                    ["src/main/*.java"] = {
+                        alternate = "src/test/{}Test.java",
+                        type = "source",
+                    },
+                    ["src/test/*Test.java"] = {
+                        alternate = "src/main/{}.java",
+                        type = "test",
+                    },
+                    -- Typescripts test files
+                    ["*.ts"] = {
+                        alternate = "{}.test.ts",
+                        type = "source",
+                    },
+                    ["*.test.ts"] = {
+                        alternate = "{}.ts",
+                        type = "test",
+                    },
                 },
             }
         end,
