@@ -29,6 +29,13 @@ return {
             ]])
 
             vim.cmd([[
+                command! -bang -nargs=* Rg
+                    \ call fzf#vim#grep(
+                    \   'rg --hidden --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+                    \   fzf#vim#with_preview(), <bang>0)
+            ]])
+
+            vim.cmd([[
                 function! s:list_cmd()
                     let base = fnamemodify(expand('%'), ':h:.:S')
                     return base == '.' ? 'fd ''\+page.svelte'' ''src/routes'' --type f --hidden' : printf('fd ''\+page.svelte'' ''src/routes'' --type f --hidden | proximity-sort %s', shellescape(expand('%')))
