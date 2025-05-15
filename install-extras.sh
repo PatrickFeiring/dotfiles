@@ -2,11 +2,12 @@
 brew install neovim
 brew install ghostty
 brew install pure
+brew install tmux
+brew install tmuxinator
 
 brew install fd
 brew install neovim
 brew install ripgrep
-brew install tmux
 brew install tree
 brew install yqrashawn/goku/goku
 brew install fnm
