@@ -66,8 +66,8 @@ return {
                 callback = function(ev)
                     local opts = { buffer = ev.buf }
 
-                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
                     vim.keymap.set("n", "gr", function()
                         vim.lsp.buf.references({ includeDeclaration = false })
                     end, opts)
