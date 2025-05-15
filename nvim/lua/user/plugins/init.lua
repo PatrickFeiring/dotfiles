@@ -16,6 +16,52 @@ return {
     "lukas-reineke/indent-blankline.nvim",
 
     {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        keys = {
+            {
+                "<leader>.",
+                function()
+                    Snacks.scratch({
+                        name = "Notes",
+                        ft = "markdown",
+                        filekey = {
+                            cwd = false,
+                            branch = false,
+                            count = true,
+                        },
+                        win = {
+                            -- 'scratch' style but with wrap enabled
+                            style = {
+                                width = 100,
+                                height = 30,
+                                bo = {
+                                    buftype = "",
+                                    buflisted = false,
+                                    bufhidden = "hide",
+                                    swapfile = false,
+                                },
+                                minimal = false,
+                                noautocmd = false,
+                                zindex = 20,
+                                wo = {
+                                    winhighlight = "NormalFloat:Normal",
+                                    wrap = true,
+                                },
+                                border = "rounded",
+                                title_pos = "center",
+                                footer_pos = "center",
+                            },
+                        },
+                    })
+                end,
+                desc = "Toggle notes",
+            },
+        },
+    },
+
+    {
         "mfussenegger/nvim-lint",
         config = function()
             vim.api.nvim_create_user_command("RunMypy", function()
