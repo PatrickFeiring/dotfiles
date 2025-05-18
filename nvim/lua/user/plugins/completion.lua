@@ -85,7 +85,6 @@ return {
                         i = cmp.mapping.abort(),
                         c = cmp.mapping.close(),
                     }),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 },
 
                 completion = {
@@ -140,24 +139,36 @@ return {
             require("user.snippets")
 
             local luasnip = require("luasnip")
+            local cmp = prequire("cmp")
             local typewriter = prequire("typewriter")
 
-            local function replace_termcodes(str)
-                return vim.api.nvim_replace_termcodes(str, true, true, true)
+            _G.complete = function()
+                if cmp then
+                    local entries = cmp.get_entries()
+                    if #entries == 1 then
+                        cmp.confirm({
+                            select = true,
+                            behavior = cmp.ConfirmBehavior.Replace,
+                        })
+                    else
+                        cmp.select_next_item({
+                            behavior = cmp.SelectBehavior.Select,
+                        })
+                    end
+                end
             end
 
-            vim.api.nvim_set_keymap("i", "<Tab>", "", {
-                expr = true,
-                callback = function()
-                    if luasnip and luasnip.expandable() then
-                        return replace_termcodes("<Plug>luasnip-expand-snippet")
-                    elseif typewriter and typewriter.expandable() then
-                        return replace_termcodes("<Plug>typewriter-expand")
-                    else
-                        return replace_termcodes("<Tab>")
-                    end
-                end,
-            })
+            vim.keymap.set("i", "<Tab>", function()
+                if luasnip and luasnip.expandable() then
+                    return "<Plug>luasnip-expand-snippet"
+                elseif typewriter and typewriter.expandable() then
+                    return "<Plug>typewriter-expand"
+                elseif cmp and cmp.visible() then
+                    return "<cmd>call v:lua.complete()<CR>"
+                else
+                    return "<Tab>"
+                end
+            end, { expr = true })
 
             vim.keymap.set("i", "<C-J>", "<Plug>luasnip-jump-next")
         end,
