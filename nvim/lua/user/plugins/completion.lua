@@ -25,10 +25,12 @@ return {
                 sources = {
                     {
                         name = "nvim_lsp",
+                        group_index = 2,
                         keyword_length = 3,
                     },
                     {
                         name = "buffer",
+                        group_index = 1,
                         keyword_length = 3,
                         option = {
                             get_bufnrs = function()
@@ -41,6 +43,10 @@ return {
                                 return vim.tbl_keys(bufs)
                             end,
                         },
+                    },
+                    {
+                        name = "copilot",
+                        group_index = 2,
                     },
                 },
 
@@ -109,6 +115,23 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-nvim-lsp",
     "saadparwaiz1/cmp_luasnip",
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+        },
+    },
+    {
+        "zbirenbaum/copilot-cmp",
+        dependencies = {
+            "zbirenbaum/copilot.lua",
+            "hrsh7th/nvim-cmp",
+        },
+        opts = {},
+    },
 
     { dir = "~/Documents/typewriter.nvim" },
     {
