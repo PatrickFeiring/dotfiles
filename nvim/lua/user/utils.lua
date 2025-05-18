@@ -5,9 +5,10 @@ function M.get_tools_listed_in_pyproject()
         black = false,
         isort = false,
         mypy = false,
+        ruff = false,
     }
 
-    local path = vim.loop.cwd() .. "/pyproject.toml"
+    local path = vim.uv.cwd() .. "/pyproject.toml"
 
     local f = io.open(path, "r")
 
@@ -22,6 +23,8 @@ function M.get_tools_listed_in_pyproject()
             tools["isort"] = true
         elseif line == "[tool.mypy]" then
             tools["mypy"] = true
+        elseif line == "[tool.ruff]" then
+            tools["ruff"] = true
         end
     end
 
@@ -30,7 +33,7 @@ function M.get_tools_listed_in_pyproject()
     return tools
 end
 
-function M.has_project_file(path)
+local function has_project_file(path)
     local f = io.open(path, "r")
 
     if f == nil then
@@ -42,55 +45,20 @@ function M.has_project_file(path)
     return true
 end
 
-local groups = {
-    {
-        "+layout.server.ts",
-        "+layout.ts",
-        "+layout.svelte",
-    },
-    {
-        "+page.server.ts",
-        "+page.ts",
-        "+page.svelte",
-    },
-}
+local cache = {}
 
-function M.cycle_file_group(direction)
-    direction = direction or "forward"
+---@param path string
+function M.has_project_file(path)
+    local entry = cache[path]
 
-    local file_path = vim.fn.expand("%")
-
-    local directory = vim.fn.fnamemodify(file_path, ":h")
-    local basename = vim.fn.fnamemodify(file_path, ":t")
-
-    for _, group in ipairs(groups) do
-        for i, target_filename in ipairs(group) do
-            if target_filename == basename then
-                local start, stop, step
-
-                if direction == "backward" then
-                    start = i - 1
-                    stop = 1
-                    step = -1
-                else
-                    start = i + 1
-                    stop = #group
-                    step = 1
-                end
-
-                for j = start, stop, step do
-                    local path = directory .. "/" .. group[j]
-
-                    if vim.fn.filereadable(path) == 1 then
-                        vim.cmd("edit " .. path)
-                        return
-                    end
-                end
-
-                return
-            end
-        end
+    if entry ~= nil then
+        return entry
     end
+
+    local fresh = has_project_file(path)
+    cache[path] = fresh
+
+    return fresh
 end
 
 function M.parse_path(path)
