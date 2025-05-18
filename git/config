@@ -46,3 +46,4 @@
 
 [rebase]
     autosquash = true
+    updateRefs = true
