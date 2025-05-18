@@ -13,7 +13,6 @@
     - ~/.config/git
     - ~/.config/nix
     - ~/.config/nvim
-    - ~/.config/pet
     - ~/.config/tmux
     - ~/.local
     - ~/.local/bin
