@@ -363,6 +363,9 @@ local javascript_snippets = {
     s("ldb", between("let ", " = $derived.by(() => {", "});"), {
         condition = conditions.line_begin * c.filetype_is("svelte"),
     }),
+    s("ldp", t("let { data } = $props();"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
     s("af", between("(", ") => {", "}")),
     s("cl", function_call("console.log")),
     s("dp", {
@@ -373,6 +376,9 @@ local javascript_snippets = {
         t(".vue';"),
     }, {
         condition = conditions.line_begin * c.filetype_is("vue"),
+    }),
+    s("db", t("$derived.by(() => {", "});"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
     }),
     s("ec", t("export const "), { condition = conditions.line_begin }),
     s("ed", t("export default "), { condition = conditions.line_begin }),
@@ -422,6 +428,17 @@ local javascript_snippets = {
         i(2),
         t("';"),
     }, { condition = conditions.line_begin }),
+    s("it", line_between(between("it('", "', () => {"), t("})")), {
+        condition = function()
+            local filename = vim.api.nvim_buf_get_name(0)
+
+            if not filename then
+                return
+            end
+
+            return filename:match("%.test%.ts$") ~= nil
+        end,
+    }),
     s(
         "it",
         between("import type { ", ' } from "', '";'),
@@ -432,6 +449,9 @@ local javascript_snippets = {
         { t("import "), i(1), t(' from "@/views/"'), f(copy, 1), t(".vue;") },
         { condition = conditions.line_begin }
     ),
+    s("lc", t("let { children } = $props();"), {
+        condition = conditions.line_begin * c.filetype_is("svelte"),
+    }),
     s("ld", between("let ", " = $derived();"), {
         condition = conditions.line_begin * c.filetype_is("svelte"),
     }),
@@ -747,12 +767,14 @@ luasnip.add_snippets("sql", {
 })
 
 luasnip.add_snippets("svelte", {
-    s("renderc", t("@{render children()}")),
+    s("renderc", t("{@render children()}")),
+    s("snippet", line_between(between("{#snippet ", "()}"), t("{/snippet}"))),
     s("elseif", between("{:else if ", "}")),
     s("render", between("{@render ", "()}")),
     s("await", line_between(between("{#await ", "}"), t("{/await}"))),
     s("debug", between("{@debug ", "}")),
     s("const", between("{@const ", " = ", "}")),
+    s("props", line_between(t("interface Props {"), t("}"))),
     s("html", between("{@html ", "}")),
     s(
         "eachs",
