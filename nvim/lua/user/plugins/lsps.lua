@@ -240,6 +240,16 @@ return {
         "j-hui/fidget.nvim",
         opts = {},
     },
+    {
+        -- Until core supports textDocument/documentLink have a plugin provide it
+        -- See: https://github.com/neovim/neovim/issues/33497
+        "icholy/lsplinks.nvim",
+        config = function()
+            local lsplinks = require("lsplinks")
+            lsplinks.setup()
+            vim.keymap.set("n", "gx", lsplinks.gx)
+        end,
+    },
     "b0o/schemastore.nvim",
     {
         "smjonas/inc-rename.nvim",
