@@ -235,11 +235,24 @@ return {
         end,
     },
     {
-        "ruifm/gitlinker.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
+        -- A maintained fork of "ruifm/gitlinker.nvim",
+        "linrongbin16/gitlinker.nvim",
+        cmd = "GitLink",
         opts = {},
+        keys = {
+            {
+                "<leader>gy",
+                "<cmd>GitLink<cr>",
+                mode = { "n", "v" },
+                desc = "Yank git link",
+            },
+            {
+                "<leader>gY",
+                "<cmd>GitLink!<cr>",
+                mode = { "n", "v" },
+                desc = "Open git link",
+            },
+        },
     },
     {
         "sindrets/diffview.nvim",
