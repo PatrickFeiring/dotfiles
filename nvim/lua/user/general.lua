@@ -1,6 +1,8 @@
 vim.g.mapleader = ","
 
-vim.opt.clipboard = "unnamedplus"
+-- Be explicit about what goes into system clipboard, instead of something
+-- like `unnamedplus`
+vim.opt.clipboard = ""
 
 vim.o.hidden = true
 vim.o.updatetime = 300
