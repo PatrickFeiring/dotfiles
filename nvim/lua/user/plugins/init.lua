@@ -61,19 +61,6 @@ return {
         },
     },
 
-    {
-        "mfussenegger/nvim-lint",
-        config = function()
-            vim.api.nvim_create_user_command("RunMypy", function()
-                require("lint").try_lint("mypy")
-            end, { nargs = 0 })
-
-            vim.api.nvim_create_user_command("RunPyCodeStyle", function()
-                require("lint").try_lint("pycodestyle")
-            end, { nargs = 0 })
-        end,
-    },
-
     -- Window management
     {
         "christoomey/vim-tmux-navigator",
