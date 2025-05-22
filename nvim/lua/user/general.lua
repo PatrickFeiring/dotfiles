@@ -61,6 +61,7 @@ vim.keymap.set("n", "Q", "@q")
 vim.keymap.set("v", "Q", ":'<,'>normal! @q <CR>")
 
 vim.o.spelllang = "en_us"
+vim.o.spell = true
 vim.keymap.set("n", "<C-F>", function()
     if vim.fn.spellbadword()[1] ~= "" then
         vim.api.nvim_feedkeys("1z=", "n", false)
