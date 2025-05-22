@@ -61,7 +61,13 @@ vim.keymap.set("n", "Q", "@q")
 vim.keymap.set("v", "Q", ":'<,'>normal! @q <CR>")
 
 vim.o.spelllang = "en_us"
-vim.keymap.set("n", "<C-F>", "]s1z=")
+vim.keymap.set("n", "<C-F>", function()
+    if vim.fn.spellbadword()[1] ~= "" then
+        vim.api.nvim_feedkeys("1z=", "n", false)
+    else
+        vim.api.nvim_feedkeys("]s1z=", "n", false)
+    end
+end, { desc = "Fix spelling of next misspelled word" })
 
 vim.o.splitbelow = true
 vim.o.splitright = true
