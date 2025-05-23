@@ -24,6 +24,9 @@ require("lazy").setup("user.plugins", {
     install = {
         colorscheme = { "tokyonight" },
     },
+    change_detection = {
+        notify = false,
+    },
 })
 
 prequire("user.local")
