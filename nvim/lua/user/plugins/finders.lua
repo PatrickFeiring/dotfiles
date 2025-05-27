@@ -18,13 +18,13 @@ return {
 
             -- Sort result of Files based on proximity to current file
             vim.cmd([[
-                function! s:list_cmd()
+                function! s:list_files()
                     let base = fnamemodify(expand('%'), ':h:.:S')
                     return base == '.' ? 'fd --type f --hidden' : printf('fd --type f --hidden | proximity-sort %s', shellescape(expand('%')))
                 endfunction
 
                 command! -bang -nargs=? -complete=dir Files
-                    \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
+                    \ call fzf#vim#files(<q-args>, {'source': s:list_files(),
                     \                               'options': '--tiebreak=index'}, <bang>0)
             ]])
 
@@ -36,13 +36,13 @@ return {
             ]])
 
             vim.cmd([[
-                function! s:list_cmd()
+                function! s:list_routes()
                     let base = fnamemodify(expand('%'), ':h:.:S')
                     return base == '.' ? 'fd ''\+page.svelte'' ''src/routes'' --type f --hidden' : printf('fd ''\+page.svelte'' ''src/routes'' --type f --hidden | proximity-sort %s', shellescape(expand('%')))
                 endfunction
 
                 command! -bang -nargs=? -complete=dir Routes
-                    \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
+                    \ call fzf#vim#files(<q-args>, {'source': s:list_routes(),
                     \                               'options': '--tiebreak=index'}, <bang>0)
             ]])
 
