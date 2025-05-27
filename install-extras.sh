@@ -7,6 +7,7 @@ brew install tmuxinator
 
 brew install fd
 brew install neovim
+brew install bat
 brew install ripgrep
 brew install tree
 brew install yqrashawn/goku/goku
