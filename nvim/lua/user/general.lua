@@ -131,3 +131,10 @@ vim.cmd([[
     vnoremap <leader>x :<C-w>exe join(get("'<", "'>"), '<Bar>')<CR>
     nnoremap <leader><leader>x :call <SID>save_and_execute_file()<CR>
 ]])
+
+-- Neovim treats .env files as sh, we also do the same for .env.example etc.
+vim.filetype.add({
+    pattern = {
+        [".*%.env%..*"] = "sh",
+    },
+})
