@@ -16,6 +16,10 @@ return {
                 adapters = {
                     require("neotest-vitest"),
                 },
+                discovery = {
+                    enabled = false,
+                    concurrent = 1,
+                },
             })
 
             vim.keymap.set(
