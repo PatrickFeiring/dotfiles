@@ -49,14 +49,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            vim.o.signcolumn = "yes"
-
-            vim.diagnostic.config({
-                severity_sort = true,
-            })
-
-            vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-            vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
             vim.keymap.set("n", "<space>i", function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end)

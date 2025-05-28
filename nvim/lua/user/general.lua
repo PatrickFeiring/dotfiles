@@ -138,3 +138,14 @@ vim.filetype.add({
         [".*%.env%..*"] = "sh",
     },
 })
+
+vim.diagnostic.config({
+    severity_sort = true,
+})
+
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+-- We don't want a sign column that causes layout shifts depending on whether
+-- there are diagnostics or not
+vim.o.signcolumn = "yes"
