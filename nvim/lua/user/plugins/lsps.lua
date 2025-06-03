@@ -49,14 +49,10 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            vim.keymap.set("n", "<space>i", function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-            end)
-
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-                callback = function(ev)
-                    local opts = { buffer = ev.buf }
+                callback = function(args)
+                    local opts = { buffer = args.buf }
 
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                     vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
@@ -65,6 +61,12 @@ return {
                     end, opts)
 
                     vim.keymap.set("n", "<space>h", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "<space>i", function()
+                        vim.lsp.inlay_hint.enable(
+                            not vim.lsp.inlay_hint.is_enabled()
+                        )
+                    end, opts)
+
                     vim.keymap.set("n", "<space>r", function()
                         return ":IncRename " .. vim.fn.expand("<cword>")
                     end, { expr = true })
