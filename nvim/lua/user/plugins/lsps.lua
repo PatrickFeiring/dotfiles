@@ -52,6 +52,7 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("UserLspConfig", {}),
                 callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
                     local opts = { buffer = args.buf }
 
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -65,6 +66,19 @@ return {
                         vim.lsp.inlay_hint.enable(
                             not vim.lsp.inlay_hint.is_enabled()
                         )
+
+                        -- We treat color preview as an inlay hint as well
+                        if
+                            client:supports_method("textDocument/documentColor")
+                        then
+                            vim.lsp.document_color.enable(
+                                not vim.lsp.document_color.is_enabled(args.buf),
+                                args.buf,
+                                {
+                                    style = "virtual",
+                                }
+                            )
+                        end
                     end, opts)
 
                     vim.keymap.set("n", "<space>r", function()
