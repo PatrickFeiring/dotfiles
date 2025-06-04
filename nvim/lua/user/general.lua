@@ -141,6 +141,7 @@ vim.filetype.add({
 
 vim.diagnostic.config({
     severity_sort = true,
+    virtual_text = true,
 })
 
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
