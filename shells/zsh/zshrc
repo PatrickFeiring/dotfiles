@@ -69,15 +69,6 @@ function append-help() {
 zle -N append-help
 bindkey '^h' append-help
 
-function pet-select() {
-  BUFFER=$(pet search --query "$LBUFFER")
-  CURSOR=$#BUFFER
-  zle redisplay
-}
-zle -N pet-select
-stty -ixon
-bindkey '^s' pet-select
-
 export ZSH_AUTOSUGGEST_STRATEGY=(completion)
 
 [ -n "${commands[direnv]}" ] && eval "$(direnv hook zsh)"
