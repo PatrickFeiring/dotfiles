@@ -48,6 +48,8 @@ return {
             window = {
                 mappings = {
                     ["o"] = "open",
+                    ["<C-S>"] = "open_split",
+                    ["<C-V>"] = "open_vsplit",
                 },
             },
             filesystem = {
@@ -68,8 +70,8 @@ return {
             },
             {
                 "<leader>N",
-                "<cmd>Neotree toggle<CR>",
-                desc = "Toggle file explorer",
+                "<cmd>Neotree<CR>",
+                desc = "Open file explorer",
             },
         },
     },
