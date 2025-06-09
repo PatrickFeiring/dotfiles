@@ -23,6 +23,8 @@
     ~/.config/nvim/after: nvim/after
     ~/.config/nvim/templates: nvim/templates
 
+    ~/.ideavimrc: intellij/ideavimrc
+
     ~/.config/git/config: git/config
     ~/.config/git/gitignore_global: git/gitignore_global
     ~/.git-prompt.sh: git/git-prompt.sh
