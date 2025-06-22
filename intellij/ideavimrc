@@ -24,7 +24,10 @@ voremap > >gv
 
 noremap Y y$ 
 
-noremap <C-W>q :quit<CR>
+" In Vim one would normally map this to :quit<CR> in order to close the split.
+" In Intellij we map it to the close command to get a similar effect when
+" multiple tabs are open
+noremap <C-W>q <C-W>c
 
 noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
@@ -41,13 +44,22 @@ map <Space>r <Action>(RenameElement)
 map <Space>e <Action>(ShowErrorDescription)
 map <Space>h <Action>(QuickJavaDoc)
 map <Space>aa <Action>(Generate)
+map <Space>f <Action>(ReformatCode)
 
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
 
+map g< <Action>(MoveElementLeft)
+map g> <Action>(MoveElementRight)
+
 " Vim unimpaired emulation
-map ]e <Action>(MoveStatementDown)
-map [e <Action>(MoveStatementUp)
+map ]e <Action>(MoveLineDown)
+map [e <Action>(MoveLineUp)
+map ]E <Action>(MoveStatementDown)
+map [E <Action>(MoveStatementUp)
 
 noremap ]<Space> m'o<Esc>k`'
-noremap [<Space> m'O<Esc>j`'
+noremap [<Space> m'o<Esc>`':action MoveLineDown<CR>
+
+noremap <leader><leader> :source ~/.ideavimrc<CR>
+
