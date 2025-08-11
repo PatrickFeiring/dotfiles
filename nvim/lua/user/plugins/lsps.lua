@@ -83,6 +83,19 @@ return {
                         end
                     end, opts)
 
+                    -- TODO: remove check once fully on 0.12
+                    if
+                        client:supports_method(
+                            "textDocument/linkedEditingRange"
+                        )
+                        and vim.lsp.linked_editing_range
+                    then
+                        vim.lsp.linked_editing_range.enable(
+                            true,
+                            { client_id = args.data.client_id }
+                        )
+                    end
+
                     vim.keymap.set("n", "<space>r", function()
                         return ":IncRename " .. vim.fn.expand("<cword>")
                     end, { expr = true })
