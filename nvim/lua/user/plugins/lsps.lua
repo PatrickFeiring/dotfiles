@@ -68,8 +68,10 @@ return {
                         )
 
                         -- We treat color preview as an inlay hint as well
+                        -- TODO: remove check once fully on 0.12
                         if
                             client:supports_method("textDocument/documentColor")
+                            and vim.lsp.document_color
                         then
                             vim.lsp.document_color.enable(
                                 not vim.lsp.document_color.is_enabled(args.buf),
