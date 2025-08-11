@@ -23,9 +23,6 @@
 [branch]
     sort = -committerdate
 
-[core]
-    excludesfile = ~/.config/git/gitignore_global
-
 [diff]
     colorMoved = zebra
 

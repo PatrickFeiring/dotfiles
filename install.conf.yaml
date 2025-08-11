@@ -27,7 +27,7 @@
 
     ~/.config/git/config: git/config
     ~/.config/git/config_local: git/config_local
-    ~/.config/git/gitignore_global: git/gitignore_global
+    ~/.config/git/ignore: git/ignore
     ~/.git-prompt.sh: git/git-prompt.sh
     ~/.git-completion.sh: git/git-completion.sh
 
