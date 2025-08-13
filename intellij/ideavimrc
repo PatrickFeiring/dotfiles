@@ -61,5 +61,15 @@ map [E <Action>(MoveStatementUp)
 noremap ]<Space> m'o<Esc>k`'
 noremap [<Space> m'o<Esc>`':action MoveLineDown<CR>
 
+map <C-B><C-B> <Action>(ToggleBreakpoint)
+
+map <C-X><C-X> <Action>(Resume)
+map <C-X><C-J> <Action>(StepOver)
+map <C-X><C-L> <Action>(StepInto)
+map <C-X><C-H> <Action>(StepOut)
+
+map <leader>xx <Action>(RunClass)
+map <leader>xd <Action>(DebugClass)
+
 noremap <leader><leader> :source ~/.ideavimrc<CR>
 
