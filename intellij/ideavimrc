@@ -19,8 +19,8 @@ Plug 'preservim/nerdtree'
 map <leader>n :NERDTreeFind<CR>
 
 noremap <CR> :noh<CR><CR>
-voremap < <gv
-voremap > >gv
+vnoremap < <gv
+vnoremap > >gv
 
 noremap Y y$ 
 
