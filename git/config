@@ -42,7 +42,8 @@
     autoSetupRemote = true
 
 [rebase]
-    autosquash = true
+    autoSquash = true
+    autoStash = true
     updateRefs = true
 
 [user]
