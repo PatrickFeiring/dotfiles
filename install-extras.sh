@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 brew install neovim
 brew install ghostty
 brew install pure
