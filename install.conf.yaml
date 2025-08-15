@@ -11,6 +11,7 @@
     - ~/.config/fd
     - ~/.config/ghostty
     - ~/.config/git
+    - ~/.config/ideavim
     - ~/.config/nix
     - ~/.config/nvim
     - ~/.config/tmux
@@ -23,7 +24,7 @@
     ~/.config/nvim/after: nvim/after
     ~/.config/nvim/templates: nvim/templates
 
-    ~/.ideavimrc: intellij/ideavimrc
+    ~/.config/ideavim/ideavimrc: ideavim/ideavimrc
 
     ~/.config/git/config: git/config
     ~/.config/git/config_local: git/config_local
@@ -40,6 +41,7 @@
     ~/.zsh_plugins: shells/zsh/zsh_plugins
     ~/.utils.sh: shells/utils.sh
     ~/.local/bin/launch_editor.sh: shells/launch_editor.sh
+
     ~/.config/fd/ignore: fd/ignore
 
     ~/.config/ghostty/config: ghostty/config
