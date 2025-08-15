@@ -150,3 +150,9 @@ vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 -- We don't want a sign column that causes layout shifts depending on whether
 -- there are diagnostics or not
 vim.o.signcolumn = "yes"
+
+local version = vim.version()
+
+if version.major == 0 and version.minor == 12 then
+    require("vim._extui").enable({})
+end
