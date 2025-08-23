@@ -139,6 +139,18 @@ vim.filetype.add({
     },
 })
 
+vim.filetype.add({
+    pattern = {
+        [".*/git/config.*"] = "ini",
+    },
+})
+
+vim.filetype.add({
+    pattern = {
+        [".*/bashenv"] = "sh",
+    },
+})
+
 vim.diagnostic.config({
     severity_sort = true,
     virtual_text = true,
