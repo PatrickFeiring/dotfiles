@@ -6,8 +6,6 @@ ignore = {
 }
 
 globals = {
-    "P",
-    "RELOAD",
     "prequire",
     "describe",
     "it",
