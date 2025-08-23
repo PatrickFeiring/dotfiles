@@ -191,4 +191,17 @@ function M.sort_project_paths(a, b)
     return a.path < b.path
 end
 
+function M.count_number_of_large_windows()
+    local windows = vim.api.nvim_list_wins()
+    local large_windows = 0
+
+    for _, h in ipairs(windows) do
+        if vim.api.nvim_win_get_width(h) > 35 then
+            large_windows = large_windows + 1
+        end
+    end
+
+    return large_windows
+end
+
 return M

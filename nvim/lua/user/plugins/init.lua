@@ -1,3 +1,5 @@
+local utils = require("user.utils")
+
 return {
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
@@ -204,16 +206,7 @@ return {
         "tpope/vim-fugitive",
         config = function()
             vim.keymap.set("n", "<C-G><C-G>", function()
-                local windows = vim.api.nvim_list_wins()
-                local large_windows = 0
-
-                for _, h in ipairs(windows) do
-                    if vim.api.nvim_win_get_width(h) > 35 then
-                        large_windows = large_windows + 1
-                    end
-                end
-
-                if large_windows > 1 then
+                if utils.count_number_of_large_windows() > 1 then
                     vim.cmd("Git ++curwin")
                 else
                     vim.cmd("vert Git")
