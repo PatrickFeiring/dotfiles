@@ -8,12 +8,12 @@ importers:
 
   .:
     dependencies:
+      basedpyright:
+        specifier: ^1.31.2
+        version: 1.31.2
       git-recent:
         specifier: ^2.0.1
         version: 2.0.1
-      pyright:
-        specifier: ^1.1.394
-        version: 1.1.394
       svelte-language-server:
         specifier: ^0.17.10
         version: 0.17.10(picomatch@4.0.2)
@@ -324,6 +324,11 @@ packages:
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  basedpyright@1.31.2:
+    resolution: {integrity: sha512-Rj6VGZ1y4FEmJwOVglJtIrfS+ECZ03HZUBqOSadXqcw4V57mzeVBBK6PxYBiSUGWuF393NBfnuuziugpY00Ngw==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
 
   bindings@1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
@@ -1014,11 +1019,6 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
-
-  pyright@1.1.394:
-    resolution: {integrity: sha512-6xUUlOLW1As5cbltkEFkskGfM35YeNH+mpnCyaHxiYlu3GLIq43RTgmctm6Qacxer2q7TUliaE0yIqAmecl6Tw==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -1754,6 +1754,10 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
+  basedpyright@1.31.2:
+    optionalDependencies:
+      fsevents: 2.3.3
+
   bindings@1.5.0:
     dependencies:
       file-uri-to-path: 1.0.0
@@ -2353,10 +2357,6 @@ snapshots:
   promisepipe@3.0.0: {}
 
   punycode@2.3.1: {}
-
-  pyright@1.1.394:
-    optionalDependencies:
-      fsevents: 2.3.3
 
   queue-microtask@1.2.3: {}
 

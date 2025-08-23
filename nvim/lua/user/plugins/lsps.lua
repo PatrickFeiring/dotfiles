@@ -169,7 +169,8 @@ return {
                 },
             })
 
-            lspconfig.pyright.setup({
+            -- Prefer basedpyright over pyright, a more feature rich fork of pyright
+            lspconfig.basedpyright.setup({
                 capabilities = capabilities,
             })
 
