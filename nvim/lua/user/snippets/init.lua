@@ -904,5 +904,3 @@ luasnip.add_snippets("xslt", {
     s("t", between("<xsl:text>", "</xsl:text>")),
     s("v", between('<xsl:value-of select="', '"/>')),
 })
-
-require("user.snippets.skeletons")

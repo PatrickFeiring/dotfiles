@@ -45,7 +45,7 @@ vim.keymap.set("n", "<CR>", ":noh<CR><CR>")
 
 vim.o.number = true
 vim.o.relativenumber = true
-vim.keymap.set("n", "<C-n>", ":set rnu!<CR>")
+vim.keymap.set("n", "<leader><leader>n", ":set rnu!<CR>")
 
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")

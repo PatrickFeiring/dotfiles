@@ -3,6 +3,7 @@ vim.g.python3_host_prog = "~/.virtualenvs/neovim/bin/python"
 
 require("user.globals")
 require("user.general")
+require("user.testing")
 
 -- Bootstrap lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
