@@ -905,25 +905,4 @@ luasnip.add_snippets("xslt", {
     s("v", between('<xsl:value-of select="', '"/>')),
 })
 
-local typewriter = prequire("typewriter")
-
-local function replace_termcodes(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "", {
-    expr = true,
-    callback = function()
-        if luasnip and luasnip.expandable() then
-            return replace_termcodes("<Plug>luasnip-expand-snippet")
-        elseif typewriter and typewriter.expandable() then
-            return replace_termcodes("<Plug>typewriter-expand")
-        else
-            return replace_termcodes("<Tab>")
-        end
-    end,
-})
-
-vim.keymap.set("i", "<C-J>", "<Plug>luasnip-jump-next")
-
 require("user.snippets.skeletons")
