@@ -135,6 +135,12 @@ return {
             vim.g.pastedtext_select_key = "gp"
         end,
     },
+    {
+        "jceb/vim-textobj-uri",
+        dependencies = {
+            "kana/vim-textobj-user",
+        },
+    },
 
     {
         "windwp/nvim-autopairs",
