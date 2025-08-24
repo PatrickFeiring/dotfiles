@@ -10,9 +10,17 @@ local i = luasnip.insert_node
 local f = luasnip.function_node
 local t = luasnip.text_node
 
-local c = require("user.snippets.conditions")
+local make_conditions = require("luasnip.extras.conditions")
 local conditions = require("luasnip.extras.expand_conditions")
 local filetype_functions = require("luasnip.extras.filetype_functions")
+
+local function filetype_is(filetype)
+    local function condition()
+        return vim.bo.filetype == filetype
+    end
+
+    return make_conditions.make_condition(condition)
+end
 
 local function copy(args)
     return args[1]
@@ -335,7 +343,7 @@ local javascript_snippets = {
     s("desc", line_between(between("describe('", "', () => {"), t("})"))),
     s("load", line_between(between("export const load = (", ") => {"), t("}"))),
     s("insp", between("$inspect(", ")"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("test", line_between(between("test('", "', () => {"), t("})"))),
     s("aaf", between("async (", ") => {", "}")),
@@ -361,10 +369,10 @@ local javascript_snippets = {
         condition = conditions.line_begin,
     }),
     s("ldb", between("let ", " = $derived.by(() => {", "});"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("ldp", t("let { data } = $props();"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("af", between("(", ") => {", "}")),
     s("cl", function_call("console.log")),
@@ -375,10 +383,10 @@ local javascript_snippets = {
         f(copy, 1),
         t(".vue';"),
     }, {
-        condition = conditions.line_begin * c.filetype_is("vue"),
+        condition = conditions.line_begin * filetype_is("vue"),
     }),
     s("db", t("$derived.by(() => {", "});"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("ec", t("export const "), { condition = conditions.line_begin }),
     s("ed", t("export default "), { condition = conditions.line_begin }),
@@ -394,7 +402,7 @@ local javascript_snippets = {
         i(3),
         t("';"),
     }, {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("ic", {
         t("import "),
@@ -404,7 +412,7 @@ local javascript_snippets = {
         f(copy, 1),
         t(".vue';"),
     }, {
-        condition = conditions.line_begin * c.filetype_is("vue"),
+        condition = conditions.line_begin * filetype_is("vue"),
     }),
     s("ic", {
         t("import "),
@@ -414,7 +422,7 @@ local javascript_snippets = {
         f(copy, 1),
         t(".svelte';"),
     }, {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s(
         "id",
@@ -450,16 +458,16 @@ local javascript_snippets = {
         { condition = conditions.line_begin }
     ),
     s("lc", t("let { children } = $props();"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("ld", between("let ", " = $derived();"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("lp", between("let { ", " } = $props();"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("ls", between("let ", " = $state(", ");"), {
-        condition = conditions.line_begin * c.filetype_is("svelte"),
+        condition = conditions.line_begin * filetype_is("svelte"),
     }),
     s("oe", function_call_no_semicolon("Object.entries")),
     s("ok", function_call_no_semicolon("Object.keys")),
