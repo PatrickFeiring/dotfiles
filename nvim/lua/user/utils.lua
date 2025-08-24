@@ -196,7 +196,10 @@ function M.count_number_of_large_windows()
     local large_windows = 0
 
     for _, h in ipairs(windows) do
-        if vim.api.nvim_win_get_width(h) > 35 then
+        if
+            vim.api.nvim_win_get_width(h) > 35
+            and vim.api.nvim_win_get_height(h) > 35
+        then
             large_windows = large_windows + 1
         end
     end
