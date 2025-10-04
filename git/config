@@ -1,11 +1,14 @@
 [alias]
+    ap = add -p .
     c = commit
+    cm = commit -m
     d = diff
-    dc = diff --cached
+    ds = diff --staged
     l = "log --format='%C(auto) %h %d %s'"
     shh = show HEAD
     st = status
 
+    amend = commit --amend -C HEAD
     lease = push --force-with-lease
 
     set-blame-file = "!git config blame.ignoreRevsFile .git-blame-ignore-revs"
