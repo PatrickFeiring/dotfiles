@@ -217,7 +217,27 @@ return {
                 else
                     vim.cmd("vert Git")
                 end
-            end)
+            end, {
+                desc = "Toggle fugitive window",
+            })
+
+            vim.keymap.set("n", "<C-G><C-B>", function()
+                local windows = vim.api.nvim_list_wins()
+
+                for _, h in ipairs(windows) do
+                    local bufnr = vim.api.nvim_win_get_buf(h)
+                    local filetype = vim.bo[bufnr].filetype
+
+                    if filetype == "fugitiveblame" then
+                        vim.api.nvim_win_close(h, false)
+                        return
+                    end
+                end
+
+                vim.cmd("G blame")
+            end, {
+                desc = "Toggle blame window",
+            })
         end,
     },
     {
