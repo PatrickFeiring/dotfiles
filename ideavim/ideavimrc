@@ -37,6 +37,7 @@ noremap <C-H> <C-W><C-H>
 
 map gd <Action>(GotoDeclaration)
 map gD <Action>(GotoTypeDeclaration)
+map gi <Action>(GotoImplementation)
 map gt <Action>(GotoTest)
 
 map gr <Action>(ShowUsages)
@@ -65,7 +66,7 @@ map [E <Action>(MoveStatementUp)
 noremap ]<Space> m'o<Esc>k`'
 noremap [<Space> m'o<Esc>`':action MoveLineDown<CR>
 
-map <C-B><C-B> <Action>(ToggleBreakpoint)
+map <C-B><C-B> <Action>(ToggleLineBreakpoint)
 
 map <C-X><C-X> <Action>(Resume)
 map <C-X><C-J> <Action>(StepOver)
@@ -73,6 +74,8 @@ map <C-X><C-L> <Action>(StepInto)
 map <C-X><C-H> <Action>(StepOut)
 
 map <leader>xx <Action>(RunClass)
-map <leader>xd <Action>(DebugClass)
+map <leader>xd <Action>(Debug)
 
-noremap <leader><leader> :source ~/config/ideavim/ideavimrc<CR>
+map <leader><leader>d <Action>(ManageRecentProjects)
+
+noremap <leader>r :source ~/.config/ideavim/ideavimrc<CR>
