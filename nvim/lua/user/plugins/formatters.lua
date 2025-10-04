@@ -34,7 +34,7 @@ return {
                     "prettier",
                     stop_after_first = true,
                 },
-                typescript_react = {
+                typescriptreact = {
                     "prettierd",
                     "prettier",
                     stop_after_first = true,
