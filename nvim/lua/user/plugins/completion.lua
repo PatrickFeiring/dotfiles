@@ -160,7 +160,9 @@ return {
             end
 
             vim.keymap.set("i", "<Tab>", function()
-                if luasnip and luasnip.expandable() then
+                if vim.snippet.active({ direction = 1 }) then
+                    return "<Cmd>lua vim.snippet.jump(1)<CR>"
+                elseif luasnip and luasnip.expandable() then
                     return "<Plug>luasnip-expand-snippet"
                 elseif typewriter and typewriter.expandable() then
                     return "<Plug>typewriter-expand"
