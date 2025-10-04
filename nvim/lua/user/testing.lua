@@ -77,11 +77,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
 
         vim.snippet.expand(([[
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import {{component}} from './{{component}}.tsx';
+import {{component}} from './{{component}}';
 
 const meta = {
     component: {{component}},
-} satisfies Meta<typeof {{component}>;
+} satisfies Meta<typeof {{component}}>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
