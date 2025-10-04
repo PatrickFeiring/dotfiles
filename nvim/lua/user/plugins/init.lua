@@ -247,16 +247,16 @@ return {
         opts = {},
         keys = {
             {
-                "<leader>gy",
+                "<C-G><C-Y>",
                 "<cmd>GitLink<cr>",
                 mode = { "n", "v" },
-                desc = "Yank git link",
+                desc = "Copy git link to clipboard",
             },
             {
-                "<leader>gY",
+                "<C-G><C-X>",
                 "<cmd>GitLink!<cr>",
                 mode = { "n", "v" },
-                desc = "Open git link",
+                desc = "Open git link in browser",
             },
         },
     },

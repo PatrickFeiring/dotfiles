@@ -53,6 +53,9 @@ map [d <Action>(GotoPreviousError)
 map g< <Action>(MoveElementLeft)
 map g> <Action>(MoveElementRight)
 
+map <C-G><C-Y> <Action>(GitHub.Copy.Link)
+map <C-G><C-B> <Action>(Annotate)
+
 " Vim unimpaired emulation
 map ]e <Action>(MoveLineDown)
 map [e <Action>(MoveLineUp)
