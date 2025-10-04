@@ -95,6 +95,24 @@ export const $1 = {
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile" }, {
+    pattern = "*.tsx",
+    group = template_group,
+    callback = function(_)
+        if vim.fn.expand("%"):match(".stories.tsx$") then
+            return
+        end
+        local component = vim.fn.expand("%:t:r")
+
+        vim.snippet.expand(([[
+function {{component}}() {
+    $0
+}
+
+export default {{component}};]]):gsub("{{component}}", component))
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile" }, {
     pattern = "*.stories.svelte",
     group = template_group,
     callback = function(_)
@@ -130,7 +148,7 @@ vim.keymap.set("n", "<C-n>", function()
     }, function(choice)
         if choice == "test" then
             M.create_test_file()
-        else
+        elseif choice == "stories" then
             M.create_stories_file()
         end
     end)
