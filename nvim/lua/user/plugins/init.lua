@@ -144,9 +144,11 @@ return {
 
     {
         "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup({})
-        end,
+        opts = {},
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        opts = {},
     },
     "tpope/vim-endwise",
     "andrewradev/splitjoin.vim",
