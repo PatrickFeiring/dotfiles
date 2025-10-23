@@ -151,6 +151,12 @@ vim.filetype.add({
     },
 })
 
+vim.filetype.add({
+    pattern = {
+        [".*/*.ts.snap"] = "typescript",
+    },
+})
+
 vim.diagnostic.config({
     severity_sort = true,
     virtual_text = true,
