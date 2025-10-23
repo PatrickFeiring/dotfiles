@@ -2,16 +2,29 @@ return {
     {
         "stevearc/conform.nvim",
         config = function()
+            local conform = require("conform")
+
+            local web = function(bufnr)
+                if conform.get_formatter_info("biome", bufnr).available then
+                    return {
+                        "biome-organize-imports",
+                        "biome",
+                    }
+                else
+                    return {
+                        "prettierd",
+                        "prettier",
+                        stop_after_first = true,
+                    }
+                end
+            end
+
             local formatters_by_ft = {
-                css = { "prettierd", "prettier", stop_after_first = true },
-                html = { "prettierd", "prettier", stop_after_first = true },
-                javascript = {
-                    "prettierd",
-                    "prettier",
-                    stop_after_first = true,
-                },
-                json = { "prettierd", "prettier", stop_after_first = true },
-                jsonc = { "prettierd", "prettier", stop_after_first = true },
+                css = web,
+                html = web,
+                javascript = web,
+                json = web,
+                jsonc = web,
                 lua = { "stylua" },
                 markdown = { "injected" },
                 python = function(bufnr)
@@ -26,21 +39,13 @@ return {
                         return { "isort", "black" }
                     end
                 end,
-                scss = { "prettierd", "prettier", stop_after_first = true },
+                scss = web,
                 sql = { "pg_format" },
-                svelte = { "prettierd", "prettier", stop_after_first = true },
-                typescript = {
-                    "prettierd",
-                    "prettier",
-                    stop_after_first = true,
-                },
-                typescriptreact = {
-                    "prettierd",
-                    "prettier",
-                    stop_after_first = true,
-                },
-                vue = { "prettierd", "prettier", stop_after_first = true },
-                yaml = { "prettierd", "prettier", stop_after_first = true },
+                svelte = web,
+                typescript = web,
+                typescriptreact = web,
+                vue = web,
+                yaml = web,
             }
 
             local lsp_only = { "rust" }
