@@ -169,8 +169,6 @@ vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 -- there are diagnostics or not
 vim.o.signcolumn = "yes"
 
-local version = vim.version()
-
-if version.major == 0 and version.minor == 12 then
-    require("vim._extui").enable({})
-end
+require("vim._core.ui2").enable({
+    enable = true,
+})

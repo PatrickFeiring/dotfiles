@@ -68,10 +68,8 @@ return {
                         )
 
                         -- We treat color preview as an inlay hint as well
-                        -- TODO: remove check once fully on 0.12
                         if
                             client:supports_method("textDocument/documentColor")
-                            and vim.lsp.document_color
                         then
                             vim.lsp.document_color.enable(
                                 not vim.lsp.document_color.is_enabled(args.buf),
@@ -83,18 +81,21 @@ return {
                         end
                     end, opts)
 
-                    -- TODO: remove check once fully on 0.12
                     if
                         client:supports_method(
                             "textDocument/linkedEditingRange"
                         )
-                        and vim.lsp.linked_editing_range
                     then
                         vim.lsp.linked_editing_range.enable(
                             true,
                             { client_id = args.data.client_id }
                         )
                     end
+
+                    vim.lsp.on_type_formatting.enable(
+                        true,
+                        { client_id = args.data.client_id }
+                    )
 
                     vim.keymap.set("n", "<space>r", function()
                         return ":IncRename " .. vim.fn.expand("<cword>")
@@ -280,16 +281,6 @@ return {
     {
         "j-hui/fidget.nvim",
         opts = {},
-    },
-    {
-        -- Until core supports textDocument/documentLink have a plugin provide it
-        -- See: https://github.com/neovim/neovim/issues/33497
-        "icholy/lsplinks.nvim",
-        config = function()
-            local lsplinks = require("lsplinks")
-            lsplinks.setup()
-            vim.keymap.set("n", "gx", lsplinks.gx)
-        end,
     },
     "b0o/schemastore.nvim",
     {
