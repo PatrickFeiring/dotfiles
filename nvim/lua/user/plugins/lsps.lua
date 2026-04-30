@@ -143,14 +143,15 @@ return {
                 )
             end
 
-            local lspconfig = require("lspconfig")
-
             -- Configure individual language servers for general languages
-            lspconfig.hls.setup({
+            vim.lsp.config("hls", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("hls")
 
-            lspconfig.lua_ls.setup({
+            vim.lsp.enable("marksman")
+
+            vim.lsp.config("lua_ls", {
                 settings = {
                     Lua = {
                         runtime = {
@@ -168,13 +169,15 @@ return {
                     },
                 },
             })
+            vim.lsp.enable("lua_ls")
 
             -- Prefer basedpyright over pyright, a more feature rich fork of pyright
-            lspconfig.basedpyright.setup({
+            vim.lsp.config("basedpyright", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("basedpyright")
 
-            lspconfig.rust_analyzer.setup({
+            vim.lsp.config("rust_analyzer", {
                 capabilities = capabilities,
                 settings = {
                     ["rust-analyzer"] = {
@@ -184,24 +187,29 @@ return {
                     },
                 },
             })
+            vim.lsp.enable("rust_analyzer")
 
-            lspconfig.jdtls.setup({
+            vim.lsp.config("jdtls", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("jdtls")
 
-            lspconfig.cssls.setup({
+            vim.lsp.config("cssls", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("cssls")
 
-            lspconfig.html.setup({
+            vim.lsp.config("html", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("html")
 
-            lspconfig.svelte.setup({
+            vim.lsp.config("svelte", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("svelte")
 
-            lspconfig.ts_ls.setup({
+            vim.lsp.config("ts_ls", {
                 capabilities = capabilities,
                 settings = {
                     typescript = {
@@ -230,17 +238,15 @@ return {
                     },
                 },
             })
-
-            lspconfig.volar.setup({
-                capabilities = capabilities,
-            })
+            vim.lsp.enable("ts_ls")
 
             -- Configure individual language servers for configuration languages
-            lspconfig.dhall_lsp_server.setup({
+            vim.lsp.config("dhall_lsp_server", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("dhall_lsp_server")
 
-            lspconfig.jsonls.setup({
+            vim.lsp.config("jsonls", {
                 capabilities = capabilities,
                 settings = {
                     json = {
@@ -249,12 +255,14 @@ return {
                     },
                 },
             })
+            vim.lsp.enable("jsonls")
 
-            lspconfig.taplo.setup({
+            vim.lsp.config("taplo", {
                 capabilities = capabilities,
             })
+            vim.lsp.enable("taplo")
 
-            lspconfig.yamlls.setup({
+            vim.lsp.config("yamlls", {
                 capabilities = capabilities,
                 settings = {
                     yaml = {
@@ -266,6 +274,7 @@ return {
                     },
                 },
             })
+            vim.lsp.enable("yamlls")
         end,
     },
     {
