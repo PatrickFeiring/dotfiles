@@ -522,11 +522,14 @@ local markdown_snippets = {
     s("svelte", line_between(t("```svelte"), t("```"))),
     s("bash", line_between(t("```bash"), t("```"))),
     s("html", line_between(t("```html"), t("```"))),
+    s("java", line_between(t("```java"), t("```"))),
     s("json", line_between(t("```json"), t("```"))),
+    s("kotlin", line_between(t("```kotlin"), t("```"))),
     s("rust", line_between(t("```rust"), t("```"))),
     s("yaml", line_between(t("```yaml"), t("```"))),
     s("css", line_between(t("```css"), t("```"))),
     s("sql", line_between(t("```sql"), t("```"))),
+    s("tla", line_between(t("```tla"), t("```"))),
     s("ts", line_between(t("```typescript"), t("```"))),
     s("py", line_between(t("```python"), t("```"))),
     s("a", { t("["), i(1, "description"), t("]("), i(2, "link"), t(")") }),
@@ -816,6 +819,24 @@ luasnip.add_snippets("svelte", {
     ),
     s("#", between('id=, "', '"')),
     s(".", between('class="', '"')),
+})
+
+luasnip.add_snippets("tla", {
+    s("spec", between("Spec == Init /\\ [][Next]_<<", ">>")),
+    s("and", t("/\\ ")),
+    s("or", t("\\/ ")),
+    s("up", {
+        i(1),
+        t("' = ["),
+        f(copy, 1),
+        t(" EXCEPT !["),
+        i(2),
+        t("] = "),
+        i(3),
+        t("]"),
+    }),
+    s("f", t("FALSE")),
+    s("t", t("TRUE")),
 })
 
 luasnip.add_snippets("vue", {
