@@ -9,6 +9,7 @@ set hlsearch
 set incsearch
 
 set ideajoin
+set matchit
 
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/argtextobj.vim'
@@ -46,6 +47,8 @@ map <Space>r <Action>(RenameElement)
 map <Space>e <Action>(ShowErrorDescription)
 map <Space>h <Action>(QuickJavaDoc)
 map <Space>aa <Action>(Generate)
+map <Space>aai <Action>(Inline)
+map <Space>aav <Action>(IntroduceVariable)
 map <Space>f <Action>(ReformatCode)
 
 map ]d <Action>(GotoNextError)
@@ -65,6 +68,8 @@ map [E <Action>(MoveStatementUp)
 
 noremap ]<Space> m'o<Esc>k`'
 noremap [<Space> m'o<Esc>`':action MoveLineDown<CR>
+
+noremap <C-M> /toBe(<CR>cwtoBe_TODO<Esc>
 
 map <C-B><C-B> <Action>(ToggleLineBreakpoint)
 
