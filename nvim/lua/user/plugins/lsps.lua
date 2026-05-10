@@ -60,6 +60,7 @@ return {
                     vim.keymap.set("n", "gr", function()
                         vim.lsp.buf.references({ includeDeclaration = false })
                     end, opts)
+                    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 
                     vim.keymap.set("n", "<space>h", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "<space>i", function()
